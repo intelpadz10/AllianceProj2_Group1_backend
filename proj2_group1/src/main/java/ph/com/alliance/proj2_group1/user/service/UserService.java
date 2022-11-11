@@ -30,6 +30,6 @@ public class UserService implements IUserService {
 	public User findUserbyID (int ID) {
 		
 		return userJpaRepository.getReferenceById(ID);
-		s
+		
 	}
 }

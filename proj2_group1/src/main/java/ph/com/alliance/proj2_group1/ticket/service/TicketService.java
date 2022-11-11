@@ -1,14 +1,12 @@
 package ph.com.alliance.proj2_group1.ticket.service;
 
-import ph.com.alliance.proj2_group1.repository.iTicketRepository;
-import ph.com.alliance.proj2_group1.service.iTicketService;
 import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 import ph.com.alliance.proj2_group1.ticket.repository.TicketRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.google.gson.Gson;
+//import com.google.gson.Gson;
 
 @Service
 public class TicketService implements ITicketService{
