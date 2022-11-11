@@ -1,7 +1,68 @@
-package ph.com.alliance.proj2_group1.entity;
+package ph.com.alliance.proj2_group1.ticket.entity;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+@Entity
 public class Ticket {
-	private int ticketID;
+
+	@Id
+	private Integer ticketID;
+	private String assignee;
+	private String status;
+	private String subject;
+	private String description;
+	private String tracker;
+
+	public Integer getTicketID() {
+		return ticketID;
+	}
+
+	public void setTicketID(Integer ticketID) {
+		this.ticketID = ticketID;
+	}
+
+	public String getAssignee() {
+		return assignee;
+	}
+
+	public void setAssignee(String assignee) {
+		this.assignee = assignee;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getTracker() {
+		return tracker;
+	}
+
+	public void setTracker(String tracker) {
+		this.tracker = tracker;
+	}
+	/* ORIGINAL CODE
+	 private int ticketID;
 	private int assignee;
 	private String status;
 	private String subject;
@@ -79,4 +140,6 @@ public class Ticket {
 	public void setClassType(String classType) {
 		this.classType = classType;
 	}
+	 */
+
 }
