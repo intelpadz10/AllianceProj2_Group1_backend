@@ -26,4 +26,10 @@ public class UserService implements IUserService {
 		return userJpaRepository.findAll();
 		
 	}
+	
+	public User findUserbyID (int ID) {
+		
+		return userJpaRepository.getReferenceById(ID);
+		s
+	}
 }
