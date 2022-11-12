@@ -4,18 +4,18 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class TicketCategory {
+public class Ticket_Category {
 
 	@Id
-	private Integer ticketCategory_id;
+	private Integer ticketcategory_id;
 
 	private Integer default_assignee;
 
-	private String ticketCategory_name;
+	private String ticketcategory_name;
 	private String description;
 
 	public Integer getTicketCategory_id() {
-		return ticketCategory_id;
+		return ticketcategory_id;
 	}
 
 	public Integer getDefault_Assignee() {
@@ -23,7 +23,7 @@ public class TicketCategory {
 	}
 
 	public String getTicketCategory_name() {
-		return ticketCategory_name;
+		return ticketcategory_name;
 	}
 
 	public String getDescription() {
@@ -31,7 +31,7 @@ public class TicketCategory {
 	}
 
 	public void setTicketCategory_id(Integer ticketID) {
-		this.ticketCategory_id = ticketID;
+		this.ticketcategory_id = ticketID;
 	}
 
 	public void setDefault_Assignee(Integer assignee_id) {
@@ -39,7 +39,7 @@ public class TicketCategory {
 	}
 
 	public void setTicketCategory_name(String ticketCategory_name) {
-		this.ticketCategory_name = ticketCategory_name;
+		this.ticketcategory_name = ticketCategory_name;
 	}
 
 	public void setDescription(String description) {
