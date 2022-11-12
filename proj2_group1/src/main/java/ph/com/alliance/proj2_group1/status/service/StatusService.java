@@ -8,7 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-//import com.google.gson.Gson;
 
 @Service
 public class StatusService implements IStatusService {
@@ -21,13 +20,13 @@ public class StatusService implements IStatusService {
 	 * for :)
 	 */
 
-	public List<Status> loadValues() {
+	public List<Status> getAllStatus() {
 
 		return statusJpaRepository.findAll();
 
 	}
 
-	public Status loadValue(Integer id) {
+	public Status getStatusbyID(Integer id) {
 
 		return statusJpaRepository.getReferenceById(id);
 

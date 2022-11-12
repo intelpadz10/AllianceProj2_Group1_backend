@@ -37,9 +37,9 @@ public class UserController {
 
 	@GetMapping("/users/all")
 	@ResponseBody
-	public ApiResponse showUsers() {
+	public ApiResponse getAll() {
 
-		List<User> users = userService.findAllUsers();
+		List<User> users = userService.getAllUsers();
 
 		if (users != null) {
 			return ApiResponse.CreateSuccess(users);
@@ -52,7 +52,7 @@ public class UserController {
 	@RequestMapping("/user/{id}")
 	public ApiResponse showUser(@PathVariable final int id) {
 
-		User savedUser = userService.findUserbyID(id);
+		User savedUser = userService.getUserbyID(id);
 
 		if (savedUser != null) {
 			return ApiResponse.CreateSuccess(savedUser, UserMessages.USER_SUCCESSFULLY_RETRIEVED);
@@ -60,8 +60,5 @@ public class UserController {
 
 		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
-	
-	
-	
-	
+
 }

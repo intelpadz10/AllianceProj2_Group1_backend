@@ -1,9 +1,6 @@
 package ph.com.alliance.proj2_group1.ticket_category.controller;
 
-
 import java.util.List;
-
-//import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +22,7 @@ public class TicketCategoryController {
 	@ResponseBody
 	public ApiResponse getAll() {
 
-		List<TicketCategory> categories = ticketCategoryService.loadValues();
+		List<TicketCategory> categories = ticketCategoryService.getAllCategories();
 
 		if (categories != null) {
 			return ApiResponse.CreateSuccess(categories, TicketCategoryMessages.TICKET_CATEGORY_SUCCESSFULLY_LOADED);
@@ -33,6 +30,5 @@ public class TicketCategoryController {
 
 		return ApiResponse.CreateError(TicketCategoryMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
-	
 
 }

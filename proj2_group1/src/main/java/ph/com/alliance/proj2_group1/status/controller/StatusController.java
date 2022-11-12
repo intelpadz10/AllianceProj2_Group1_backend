@@ -1,9 +1,6 @@
 package ph.com.alliance.proj2_group1.status.controller;
 
-
 import java.util.List;
-
-//import java.io.IOException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,7 +23,7 @@ public class StatusController {
 	@ResponseBody
 	public ApiResponse getAll() {
 
-		List<Status> statuses = statusService.loadValues();
+		List<Status> statuses = statusService.getAllStatus();
 
 		if (statuses != null) {
 			return ApiResponse.CreateSuccess(statuses, StatusMessages.STATUS_SUCCESSFULLY_LOADED);
@@ -36,11 +33,11 @@ public class StatusController {
 
 	}
 
-	@GetMapping ("/status/{id}")
+	@GetMapping("/status/{id}")
 	@ResponseBody
 	public ApiResponse getViaID(@PathVariable final Integer id) {
 
-		Status loadedStatus = statusService.loadValue(id);
+		Status loadedStatus = statusService.getStatusbyID(id);
 
 		if (loadedStatus != null) {
 			return ApiResponse.CreateSuccess(loadedStatus, StatusMessages.STATUS_SUCCESSFULLY_LOADED);

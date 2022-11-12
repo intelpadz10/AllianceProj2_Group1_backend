@@ -8,10 +8,9 @@ public class Status {
 
 	@Id
 	private Integer status_id;
-	
+
 	private String status_name;
 	private String description;
-	
 
 	public Integer getStatusId() {
 		return status_id;
@@ -25,6 +24,4 @@ public class Status {
 		return description;
 	}
 
-
-	
 }

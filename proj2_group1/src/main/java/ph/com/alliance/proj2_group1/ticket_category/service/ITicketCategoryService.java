@@ -6,8 +6,8 @@ import ph.com.alliance.proj2_group1.ticket_category.entity.TicketCategory;
 
 public interface ITicketCategoryService {
 	
-	public List<TicketCategory> loadValues(); 
-	public TicketCategory loadValue(Integer id);
+	public List<TicketCategory> getAllCategories(); 
+	public TicketCategory getCategorybyID(Integer id);
 	
 }
 

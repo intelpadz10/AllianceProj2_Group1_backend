@@ -10,30 +10,28 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService implements IUserService {
-	
-	
 
 	@Autowired
 	private UserRepository userJpaRepository;
 
-	//for id creation and update
+	// for id creation and update
 	public User saveUser(User user) {
-		
+
 		return userJpaRepository.saveAndFlush(user);
-		
+
 	}
-	
-	//for finding all user items
-	public List<User> findAllUsers() {
-		
+
+	// for finding all user items
+	public List<User> getAllUsers() {
+
 		return userJpaRepository.findAll();
-		
+
 	}
-	
-	//finding specific user using ID
-	public User findUserbyID (int ID) {
-		
+
+	// finding specific user using ID
+	public User getUserbyID(int ID) {
+
 		return userJpaRepository.getReferenceById(ID);
-		
+
 	}
 }

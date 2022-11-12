@@ -1,6 +1,5 @@
 package ph.com.alliance.proj2_group1.user.entity;
 
-
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,9 +8,9 @@ public class User {
 
 	@Id
 	private Integer user_id;
-	
+
 	private Integer role_id;
-	
+
 	private String user_name;
 	private String user_firstname;
 	private String user_lastname;
@@ -20,7 +19,6 @@ public class User {
 	private String password;
 	private String image_link;
 
-	
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -46,7 +44,7 @@ public class User {
 	}
 
 	public String getName() {
-		return user_lastname + ", "+ user_firstname ;
+		return user_lastname + ", " + user_firstname;
 	}
 
 	public void setName(String user_lastname, String user_firstname) {
@@ -61,16 +59,17 @@ public class User {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	// no get for password ofc
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
-	public String getImage_link () {
+
+	public String getImage_link() {
 		return image_link;
 	}
-	
-	public void setImage_link (String image_link) {
+
+	public void setImage_link(String image_link) {
 		this.image_link = image_link;
 	}
 
