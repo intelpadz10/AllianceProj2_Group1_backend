@@ -34,9 +34,9 @@ public class TicketController {
 		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
 
-	@GetMapping("/status/all")
+	@GetMapping("/ticket/all")
 	@ResponseBody
-	public ApiResponse getAll() {
+	public ApiResponse showTickets() {
 
 		List<Ticket> savedtickets = ticketService.getAllTickets();
 
@@ -48,8 +48,9 @@ public class TicketController {
 
 	}
 
-	@RequestMapping("/user/{id}")
-	public ApiResponse showUser(@PathVariable final int id) {
+	@RequestMapping("/ticket/{id}")
+	@ResponseBody
+	public ApiResponse showTicket(@PathVariable final int id) {
 
 		Ticket savedTicket = ticketService.getTicketbyId(id);
 

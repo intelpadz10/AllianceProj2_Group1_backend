@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -18,9 +19,22 @@ public class TicketCategoryController {
 	@Autowired
 	private TicketCategoryService ticketCategoryService;
 
-	@GetMapping("/ticket/all")
+	@GetMapping("/category/all")
 	@ResponseBody
-	public ApiResponse getAll() {
+	public ApiResponse showTicketCategories() {
+
+		List<TicketCategory> categories = ticketCategoryService.getAllCategories();
+
+		if (categories != null) {
+			return ApiResponse.CreateSuccess(categories, TicketCategoryMessages.TICKET_CATEGORY_SUCCESSFULLY_LOADED);
+		}
+
+		return ApiResponse.CreateError(TicketCategoryMessages.GENERIC_UNSUCCESSFUL_SAVE);
+	}
+	
+	@GetMapping("/category/{id}")
+	@ResponseBody
+	public ApiResponse showTicketCategory(@PathVariable final int id) {
 
 		List<TicketCategory> categories = ticketCategoryService.getAllCategories();
 

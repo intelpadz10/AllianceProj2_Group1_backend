@@ -35,7 +35,7 @@ public class UserController {
 		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
 
-	@GetMapping("/users/all")
+	@GetMapping("/user/all")
 	@ResponseBody
 	public ApiResponse getAll() {
 

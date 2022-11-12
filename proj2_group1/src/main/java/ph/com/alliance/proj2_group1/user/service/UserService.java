@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 	}
 
 	// finding specific user using ID
-	public User getUserbyID(int ID) {
+	public User getUserbyID(Integer ID) {
 
 		return userJpaRepository.getReferenceById(ID);
 
