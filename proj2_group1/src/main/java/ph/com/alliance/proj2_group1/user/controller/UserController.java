@@ -5,7 +5,9 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,24 +34,34 @@ public class UserController {
 
 		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
-	
-	@GetMapping ("/users/all")
+
+	@GetMapping("/users/all")
 	@ResponseBody
-	public ApiResponse showUsers () {
-		
-		List <User> users = userService.findAllUsers();
-		
+	public ApiResponse showUsers() {
+
+		List<User> users = userService.findAllUsers();
+
 		if (users != null) {
 			return ApiResponse.CreateSuccess(users);
 		}
-		
+
 		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
-		
+
 	}
 
-	@GetMapping("/hello")
-	@ResponseBody
-	public String helloworld() {
-		return "Hello World";
+	@RequestMapping("/user/{id}")
+	public ApiResponse showUser(@PathVariable final int id) {
+
+		User savedUser = userService.findUserbyID(id);
+
+		if (savedUser != null) {
+			return ApiResponse.CreateSuccess(savedUser, UserMessages.USER_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
+	
+	
+	
+	
 }

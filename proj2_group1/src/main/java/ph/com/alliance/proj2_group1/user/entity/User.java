@@ -20,6 +20,7 @@ public class User {
 	private String password;
 	private String image_link;
 
+	
 	public Integer getUser_id() {
 		return user_id;
 	}

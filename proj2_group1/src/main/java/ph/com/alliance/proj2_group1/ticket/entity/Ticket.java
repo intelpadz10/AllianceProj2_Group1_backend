@@ -1,5 +1,7 @@
 package ph.com.alliance.proj2_group1.ticket.entity;
 
+import java.sql.Timestamp;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -8,138 +10,87 @@ public class Ticket {
 
 	@Id
 	private Integer ticket_id;
-	private String assignee;
-	private String status;
+
+	private Integer assignee_id;
+	private Integer sender_id;
+	private Integer tracker_id;
+	private Integer ticket_category;
+	private Integer status;
+
 	private String subject;
 	private String description;
-	private String tracker;
+	private Timestamp created_at;
+	private Timestamp updated_at;
+	private Timestamp expired_at;
 
-	public Integer getTicketID() {
+	public Integer getTicket_id() {
 		return ticket_id;
 	}
-
-	public void setTicketID(Integer ticketID) {
+	public Integer getAssignee_id() {
+		return assignee_id;
+	}
+	public Integer getSender_id() {
+		return sender_id;
+	}
+	public Integer getTracker_id() {
+		return tracker_id;
+	}
+	public Integer getTicket_category() {
+		return ticket_category;
+	}
+	public Integer getStatus() {
+		return status;
+	}
+	public String getSubject() {
+		return subject;
+	}
+	public String getDescription() {
+		return description;
+	}
+	public Timestamp getCreated_at() {
+		return created_at;
+	}
+	public Timestamp getExpired_at() {
+		return expired_at;
+	}
+	
+	public void setTicket_id(Integer ticketID) {
 		this.ticket_id = ticketID;
 	}
-
-	public String getAssignee() {
-		return assignee;
-	}
-
-	public void setAssignee(String assignee) {
-		this.assignee = assignee;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
 	public void setSubject(String subject) {
+
 		this.subject = subject;
-	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getTracker() {
-		return tracker;
-	}
-
-	public void setTracker(String tracker) {
-		this.tracker = tracker;
-	}
-	/* ORIGINAL CODE
-	 private int ticketID;
-	private int assignee;
-	private String status;
-	private String subject;
-	private String description;
-	private String tracker;
-	private String classType;
-	
-	public Ticket()
-	{
-	}
-	
-	public Ticket(
-			final int ticketID, 
-			final int assignee, 
-			final String status,
-			final String subject,
-			final String description,
-			final String tracker,
-			final String classType)
-	{
-		this.ticketID = ticketID;
-		this.assignee = assignee;
-		this.status = status;
-		this.subject = subject;
-		this.description = description;
-		this.tracker = tracker;
-		this.classType = classType;
-	}
-	
-	public int getTicketID() {
-		return ticketID;
-	}
-	public void setTicketID(int ticketID) {
-		this.ticketID = ticketID;
-	}
-	
-	public int getAssignee() {
-		return assignee;
-	}
-	public void setAssignee(int assignee) {
-		this.assignee = assignee;
-	}
-	
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	
-	public String getSubject() {
-		return subject;
-	}
-	public void setSubject(String subject) {
-		this.subject = subject;
-	}
-	
-	public String getDescription() {
-		return description;
 	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
-	public String getTracker() {
-		return tracker;
+	public void setAssignee_id(Integer assignee_id) {
+		this.assignee_id = assignee_id;
 	}
-	public void setTracker(String tracker) {
-		this.tracker = tracker;
+	public void setSender_id(Integer sender_id) {
+		this.sender_id = sender_id;
 	}
-	
-	public String getClassType() {
-		return classType;
+	public void setTracker_id(Integer tracker_id) {
+		this.tracker_id = tracker_id;
 	}
-	public void setClassType(String classType) {
-		this.classType = classType;
+	public void setTicket_category(Integer ticket_category) {
+		this.ticket_category = ticket_category;
 	}
-	 */
+	public void setCreated_at(Timestamp created_at) {
+		this.created_at = created_at;
+	}
+	public Timestamp getUpdated_at() {
+		return updated_at;
+	}
+	public void setUpdated_at(Timestamp updated_at) {
+		this.updated_at = updated_at;
+	}
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+	public void setExpired_at(Timestamp expired_at) {
+		this.expired_at = expired_at;
+	}
 
 }

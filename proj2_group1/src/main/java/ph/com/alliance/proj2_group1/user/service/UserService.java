@@ -16,17 +16,21 @@ public class UserService implements IUserService {
 	@Autowired
 	private UserRepository userJpaRepository;
 
+	//for id creation and update
 	public User saveUser(User user) {
+		
 		return userJpaRepository.saveAndFlush(user);
+		
 	}
 	
-	
+	//for finding all user items
 	public List<User> findAllUsers() {
 		
 		return userJpaRepository.findAll();
 		
 	}
 	
+	//finding specific user using ID
 	public User findUserbyID (int ID) {
 		
 		return userJpaRepository.getReferenceById(ID);
