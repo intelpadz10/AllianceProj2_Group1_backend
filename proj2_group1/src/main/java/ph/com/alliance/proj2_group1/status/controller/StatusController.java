@@ -24,7 +24,7 @@ public class StatusController {
 
 	@GetMapping("/status/all")
 	@ResponseBody
-	public ApiResponse showUsers() {
+	public ApiResponse getAll() {
 
 		List<Status> statuses = statusService.loadValues();
 
@@ -38,7 +38,7 @@ public class StatusController {
 
 	@GetMapping ("/status/{id}")
 	@ResponseBody
-	public ApiResponse showUser(@PathVariable final Integer id) {
+	public ApiResponse getViaID(@PathVariable final Integer id) {
 
 		Status loadedStatus = statusService.loadValue(id);
 
