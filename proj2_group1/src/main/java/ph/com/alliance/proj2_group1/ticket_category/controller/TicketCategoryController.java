@@ -36,10 +36,10 @@ public class TicketCategoryController {
 	@ResponseBody
 	public ApiResponse showTicketCategory(@PathVariable final int id) {
 
-		List<TicketCategory> categories = ticketCategoryService.getAllCategories();
+		TicketCategory category = ticketCategoryService.getCategorybyID(id);
 
-		if (categories != null) {
-			return ApiResponse.CreateSuccess(categories, TicketCategoryMessages.TICKET_CATEGORY_SUCCESSFULLY_LOADED);
+		if (category != null) {
+			return ApiResponse.CreateSuccess(category, TicketCategoryMessages.TICKET_CATEGORY_SUCCESSFULLY_LOADED);
 		}
 
 		return ApiResponse.CreateError(TicketCategoryMessages.GENERIC_UNSUCCESSFUL_SAVE);
