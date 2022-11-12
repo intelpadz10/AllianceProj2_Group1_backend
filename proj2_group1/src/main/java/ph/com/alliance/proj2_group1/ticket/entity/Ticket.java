@@ -7,7 +7,7 @@ import javax.persistence.Id;
 public class Ticket {
 
 	@Id
-	private Integer ticketID;
+	private Integer ticket_id;
 	private String assignee;
 	private String status;
 	private String subject;
@@ -15,11 +15,11 @@ public class Ticket {
 	private String tracker;
 
 	public Integer getTicketID() {
-		return ticketID;
+		return ticket_id;
 	}
 
 	public void setTicketID(Integer ticketID) {
-		this.ticketID = ticketID;
+		this.ticket_id = ticketID;
 	}
 
 	public String getAssignee() {

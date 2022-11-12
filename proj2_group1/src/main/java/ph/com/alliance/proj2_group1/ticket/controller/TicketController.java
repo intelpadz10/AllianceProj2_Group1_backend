@@ -21,7 +21,7 @@ public class TicketController {
 
 	@PostMapping("/ticket/create")
 	@ResponseBody
-	public ApiResponse save(Ticket ticket) throws IOException {
+	public ApiResponse save(Ticket ticket) {
 
 		Ticket savedTicket = ticketService.saveTicket(ticket);
 
