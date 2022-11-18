@@ -3,12 +3,15 @@ package ph.com.alliance.proj2_group1.ticket.entity;
 import java.sql.Timestamp;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
 public class Ticket {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ticket_id;
 
 	private Integer assignee_id;
