@@ -21,8 +21,12 @@ public class Ticket {
 
 	private String subject;
 	private String description;
+	
+	//planning to make this optional 
 	private Timestamp created_at;
 	private Timestamp updated_at;
+	
+	//this one is required 
 	private Timestamp deadline_at;
 
 	public Integer getTicket_id() {
