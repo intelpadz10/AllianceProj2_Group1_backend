@@ -42,10 +42,10 @@ public class TicketController {
 		List<Ticket> savedtickets = ticketService.getAllTickets();
 
 		if (savedtickets != null) {
-			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_SAVED);
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
 		}
 
-		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
+		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE +"CAUSE:" +TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
 
@@ -56,21 +56,25 @@ public class TicketController {
 		Ticket savedTicket = ticketService.getTicketbyId(id);
 
 		if (savedTicket != null) {
-			return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_SAVED);
+			return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
 		}
 
-		return ApiResponse.CreateError(TicketMessages.TICKET_SUCCESSFULLY_SAVED);
+		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE +"CAUSE:" +TicketMessages.TICKET_FAILED_RETRIEVED);
 	}
 
 	@RequestMapping(path = "/ticket/{id}/update", method = { RequestMethod.POST, RequestMethod.PATCH,
 			RequestMethod.PUT })
 	@ResponseBody
-	public ApiResponse update(@PathVariable int id, Ticket ticket) {
+	public ApiResponse update(@PathVariable int id, Ticket newticket) {
 
 		Ticket savedTicket = ticketService.getTicketbyId(id);
 
 		if (savedTicket != null) {
-			return saveTicket(ticket);
+			if (savedTicket.getTicket_id() == newticket.getTicket_id()) {
+				return saveTicket(newticket);
+			} else {
+				return ApiResponse.CreateError (TicketMessages.GENERIC_UNSUCCESSFUL_SAVE+"ERROR:" +TicketMessages.TICKET_ID_MISMATCH);
+			}
 		} else {
 			return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
 		}
