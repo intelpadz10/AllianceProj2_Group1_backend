@@ -21,7 +21,7 @@ public class Ticket {
 	private String description;
 	private Timestamp created_at;
 	private Timestamp updated_at;
-	private Timestamp expired_at;
+	private Timestamp deadline_at;
 
 	public Integer getTicket_id() {
 		return ticket_id;
@@ -59,8 +59,8 @@ public class Ticket {
 		return created_at;
 	}
 
-	public Timestamp getExpired_at() {
-		return expired_at;
+	public Timestamp getDeadline_at() {
+		return deadline_at;
 	}
 
 	public void setTicket_id(Integer ticketID) {
@@ -109,8 +109,8 @@ public class Ticket {
 		this.status = status;
 	}
 
-	public void setExpired_at(Timestamp expired_at) {
-		this.expired_at = expired_at;
+	public void getDeadline_at(Timestamp deadline_at) {
+		this.deadline_at = deadline_at;
 	}
 
 }
