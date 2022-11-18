@@ -73,7 +73,7 @@ public class TicketController {
 			if (savedTicket.getTicket_id() == newticket.getTicket_id()) {
 				return saveTicket(newticket);
 			} else {
-				return ApiResponse.CreateError (TicketMessages.GENERIC_UNSUCCESSFUL_SAVE+"ERROR:" +TicketMessages.TICKET_ID_MISMATCH);
+				return ApiResponse.CreateError (TicketMessages.GENERIC_UNSUCCESSFUL_SAVE+" ERROR: " +TicketMessages.TICKET_ID_MISMATCH);
 			}
 		} else {
 			return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
