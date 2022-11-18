@@ -19,7 +19,7 @@ public class TicketCategoryService implements ITicketCategoryService {
 	}
 
 	public Ticket_Category getCategorybyID(Integer id) {
-		return ticketCategoryJpaRepository.getReferenceById(id);
+		return ticketCategoryJpaRepository.findById(id).get();
 	}
 
 }

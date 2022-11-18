@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,7 @@ public class TicketController {
 
 	@PostMapping("/ticket/create")
 	@ResponseBody
-	public ApiResponse save(Ticket ticket) {
+	public ApiResponse saveTicket(Ticket ticket) {
 
 		Ticket savedTicket = ticketService.saveTicket(ticket);
 
@@ -48,7 +49,7 @@ public class TicketController {
 
 	}
 
-	@RequestMapping("/ticket/{id}")
+	@GetMapping("/ticket/{id}")
 	@ResponseBody
 	public ApiResponse showTicket(@PathVariable final int id) {
 
@@ -61,6 +62,20 @@ public class TicketController {
 		return ApiResponse.CreateError(TicketMessages.TICKET_SUCCESSFULLY_SAVED);
 	}
 
+	@RequestMapping(path = "/ticket/{id}/update", method = { RequestMethod.POST, RequestMethod.PATCH,
+			RequestMethod.PUT })
+	@ResponseBody
+	public ApiResponse update(@PathVariable int id, Ticket ticket) {
+
+		Ticket savedTicket = ticketService.getTicketbyId(id);
+
+		if (savedTicket != null) {
+			return saveTicket(ticket);
+		} else {
+			return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
+		}
+
+	}
 	/*
 	 * private iTicketService service;
 	 * 

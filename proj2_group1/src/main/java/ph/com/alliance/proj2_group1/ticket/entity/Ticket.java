@@ -13,7 +13,6 @@ public class Ticket {
 
 	private Integer assignee_id;
 	private Integer sender_id;
-	private Integer tracker_id;
 	private Integer ticket_category;
 	private Integer status;
 
@@ -33,10 +32,6 @@ public class Ticket {
 
 	public Integer getSender_id() {
 		return sender_id;
-	}
-
-	public Integer getTracker_id() {
-		return tracker_id;
 	}
 
 	public Integer getTicket_category() {
@@ -83,10 +78,6 @@ public class Ticket {
 
 	public void setSender_id(Integer sender_id) {
 		this.sender_id = sender_id;
-	}
-
-	public void setTracker_id(Integer tracker_id) {
-		this.tracker_id = tracker_id;
 	}
 
 	public void setTicket_category(Integer ticket_category) {

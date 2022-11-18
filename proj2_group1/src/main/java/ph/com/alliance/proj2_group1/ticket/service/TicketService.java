@@ -23,7 +23,12 @@ public class TicketService implements ITicketService {
 	}
 
 	public Ticket getTicketbyId(Integer id) {
-		return ticketJpaRepository.getReferenceById(id);
+		return ticketJpaRepository.findById(id).get();
+	}
+	
+	public List<Ticket> getTicketsViaAssignee(int assigneeID){
+		//change code
+		return ticketJpaRepository.findAll();
 	}
 
 }

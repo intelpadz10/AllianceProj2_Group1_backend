@@ -28,7 +28,7 @@ public class StatusService implements IStatusService {
 
 	public Status getStatusbyID(Integer id) {
 
-		return statusJpaRepository.getReferenceById(id);
+		return statusJpaRepository.findById(id).get();
 
 	}
 
