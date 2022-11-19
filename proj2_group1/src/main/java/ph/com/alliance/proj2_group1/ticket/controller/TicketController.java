@@ -62,6 +62,7 @@ public class TicketController {
 		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE +"CAUSE:" +TicketMessages.TICKET_FAILED_RETRIEVED);
 	}
 
+	
 	@RequestMapping(path = "/ticket/{id}/update", method = { RequestMethod.POST, RequestMethod.PATCH,
 			RequestMethod.PUT })
 	@ResponseBody
