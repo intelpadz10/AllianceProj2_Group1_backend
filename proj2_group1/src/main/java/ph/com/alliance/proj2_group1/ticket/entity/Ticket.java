@@ -1,6 +1,7 @@
 package ph.com.alliance.proj2_group1.ticket.entity;
 
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -22,7 +23,9 @@ public class Ticket {
 	private String description;
 	
 	//planning to make this optional 
+	@Column(nullable = true)
 	private String created_at;
+	@Column(nullable = true)
 	private String updated_at;
 	
 	//this one is required 
