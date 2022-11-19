@@ -5,15 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ph.com.alliance.proj2_group1.common.models.ApiResponse;
-import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 import ph.com.alliance.proj2_group1.user.entity.User;
 import ph.com.alliance.proj2_group1.user.message.UserMessages;
 import ph.com.alliance.proj2_group1.user.service.UserService;
