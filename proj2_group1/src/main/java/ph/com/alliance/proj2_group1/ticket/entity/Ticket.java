@@ -1,7 +1,7 @@
 package ph.com.alliance.proj2_group1.ticket.entity;
 
-import java.sql.Timestamp;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -23,11 +23,13 @@ public class Ticket {
 	private String description;
 	
 	//planning to make this optional 
-	private Timestamp created_at;
-	private Timestamp updated_at;
+	@Column(nullable = true)
+	private String created_at;
+	@Column(nullable = true)
+	private String updated_at;
 	
 	//this one is required 
-	private Timestamp deadline_at;
+	private String deadline_at;
 
 	public Integer getTicket_id() {
 		return ticket_id;
@@ -57,11 +59,11 @@ public class Ticket {
 		return description;
 	}
 
-	public Timestamp getCreated_at() {
+	public String getCreated_at() {
 		return created_at;
 	}
 
-	public Timestamp getDeadline_at() {
+	public String getDeadline_at() {
 		return deadline_at;
 	}
 
@@ -91,15 +93,15 @@ public class Ticket {
 		this.ticket_category = ticket_category;
 	}
 
-	public void setCreated_at(Timestamp created_at) {
+	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
 
-	public Timestamp getUpdated_at() {
+	public String getUpdated_at() {
 		return updated_at;
 	}
 
-	public void setUpdated_at(Timestamp updated_at) {
+	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
 
@@ -107,7 +109,7 @@ public class Ticket {
 		this.status = status;
 	}
 
-	public void getDeadline_at(Timestamp deadline_at) {
+	public void setDeadline_at(String deadline_at) {
 		this.deadline_at = deadline_at;
 	}
 
