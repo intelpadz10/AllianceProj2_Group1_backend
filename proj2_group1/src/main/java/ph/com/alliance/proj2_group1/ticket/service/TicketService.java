@@ -27,21 +27,24 @@ public class TicketService implements ITicketService {
 	}
 	
 	public List<Ticket> getTicketsViaAssignee(int assigneeID){
-		//change code
-		return ticketJpaRepository.findAll();
+		return ticketJpaRepository.findAllViaAssigneeTickets(assigneeID);
+	}
+	
+	public List<Ticket> getTicketsbyStatus(int status_id){
+		return ticketJpaRepository.findAllStatusTicket(status_id);
 	}
 
-	public Ticket changeTicketStatus (Integer status, int id) throws Exception {
-		Ticket retieivedTicket = getTicketbyId (id);
-		
-		if (retieivedTicket == null) {
-			throw new Exception ("Ticket does not exist");
-		}else {
-			retieivedTicket.setStatus_id(status);
-			retieivedTicket = ticketJpaRepository.saveAndFlush(retieivedTicket); 
-		}
-		return ticketJpaRepository.changeUpdateDate(id);
-	}
+//	public Ticket changeTicketStatus (Integer status, int id) throws Exception {
+//		Ticket retieivedTicket = getTicketbyId (id);
+//		
+//		if (retieivedTicket == null) {
+//			throw new Exception ("Ticket does not exist");
+//		}else {
+//			retieivedTicket.setStatus_id(status);
+//			retieivedTicket = ticketJpaRepository.saveAndFlush(retieivedTicket); 
+//		}
+//		return ticketJpaRepository.changeUpdateDate(id);
+//	}
 	
 
 }
