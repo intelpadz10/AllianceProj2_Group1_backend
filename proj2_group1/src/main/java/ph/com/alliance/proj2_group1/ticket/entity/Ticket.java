@@ -13,23 +13,22 @@ public class Ticket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer ticket_id;
-
 	private Integer assignee_id;
 	private Integer sender_id;
 	private Integer ticket_category;
 	private Integer status;
-
 	private String subject;
 	private String description;
-	
 	//planning to make this optional 
 	@Column(nullable = true)
 	private String created_at;
 	@Column(nullable = true)
 	private String updated_at;
-	
+	@Column (nullable = true)
+	private String document_path;
 	//this one is required 
 	private String deadline_at;
+	
 
 	public Integer getTicket_id() {
 		return ticket_id;
@@ -65,6 +64,10 @@ public class Ticket {
 
 	public String getDeadline_at() {
 		return deadline_at;
+	}
+	
+	public String getDocument_path() {
+		return document_path;
 	}
 
 	public void setTicket_id(Integer ticketID) {
@@ -105,12 +108,16 @@ public class Ticket {
 		this.updated_at = updated_at;
 	}
 
-	public void setStatus(Integer status) {
+	public void setStatus_id(Integer status) {
 		this.status = status;
 	}
 
 	public void setDeadline_at(String deadline_at) {
 		this.deadline_at = deadline_at;
 	}
+	public void setDocument_Path(String document_path) {
+		this.document_path = document_path;
+	}
+
 
 }

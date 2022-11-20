@@ -31,6 +31,19 @@ public class TicketService implements ITicketService {
 		return ticketJpaRepository.findAll();
 	}
 
+	public Ticket changeTicketStatus (Integer status, int id) throws Exception {
+		Ticket retieivedTicket = getTicketbyId (id);
+		
+		if (retieivedTicket == null) {
+			throw new Exception ("Ticket does not exist");
+		}else {
+			retieivedTicket.setStatus_id(status);
+			retieivedTicket = ticketJpaRepository.saveAndFlush(retieivedTicket); 
+		}
+		return ticketJpaRepository.changeUpdateDate(id);
+	}
+	
+
 }
 
 /*
