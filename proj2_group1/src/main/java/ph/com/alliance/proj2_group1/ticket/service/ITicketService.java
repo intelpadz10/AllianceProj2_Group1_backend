@@ -9,7 +9,7 @@ public interface ITicketService {
 	public Ticket saveTicket(Ticket ticket);
 	public List<Ticket> getAllTickets();
 	public Ticket getTicketbyId(Integer id);
-//	public Ticket changeTicketStatus (Integer status, int id) throws Exception;
+	public Ticket changeTicketStatus (Integer status, Integer id) throws Exception;
 	
 }
 

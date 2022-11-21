@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.sql.Timestamp;  
+import java.time.LocalDateTime;  
 
 @Entity
 public class Ticket {
@@ -16,10 +18,9 @@ public class Ticket {
 	private Integer assignee_id;
 	private Integer sender_id;
 	private Integer ticket_category;
-	private Integer status;
+	private Integer status_id;
 	private String subject;
 	private String description;
-	//planning to make this optional 
 	@Column(nullable = true)
 	private String created_at;
 	@Column(nullable = true)
@@ -29,6 +30,21 @@ public class Ticket {
 	//this one is required 
 	private String deadline_at;
 	
+	public Ticket update (Ticket temp) {
+		if (temp.getAssignee_id() != null )
+			this.setAssignee_id(temp.assignee_id);
+		if (temp.getStatus_id() != null)
+			this.setStatus_id (temp.status_id);
+		if (temp.getSubject() != null)
+			this.setSubject(temp.subject);
+		if (temp.getDescription() != null)
+			this.setDescription(temp.description);
+		if (temp.getDocument_path() != null)
+			this.setDocument_Path(temp.document_path);
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());  
+		this.setUpdated_at(timestamp.toString());
+		return this;
+	}
 
 	public Integer getTicket_id() {
 		return ticket_id;
@@ -46,8 +62,8 @@ public class Ticket {
 		return ticket_category;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Integer getStatus_id() {
+		return status_id;
 	}
 
 	public String getSubject() {
@@ -68,6 +84,11 @@ public class Ticket {
 	
 	public String getDocument_path() {
 		return document_path;
+	}
+
+
+	public String getUpdated_at() {
+		return updated_at;
 	}
 
 	public void setTicket_id(Integer ticketID) {
@@ -99,17 +120,13 @@ public class Ticket {
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
-
-	public String getUpdated_at() {
-		return updated_at;
-	}
-
+	
 	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
 
 	public void setStatus_id(Integer status) {
-		this.status = status;
+		this.status_id = status;
 	}
 
 	public void setDeadline_at(String deadline_at) {
