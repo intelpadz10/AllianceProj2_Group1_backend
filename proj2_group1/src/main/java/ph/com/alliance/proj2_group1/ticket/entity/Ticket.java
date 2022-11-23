@@ -14,8 +14,8 @@ public class Ticket {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "ticket_id")
-	private Integer id;
+	private Integer ticket_id;
+	
 	@Column(name = "assignee_id")
 	private Integer assignee;
 	@Column(name = "sender_id")
@@ -27,22 +27,22 @@ public class Ticket {
 
 	private String subject;
 	private String description;
-	@Column (nullable = true)
+	@Column(nullable = true)
 	private String created_at;
-	@Column (nullable = true )
+	@Column(nullable = true)
 	private String updated_at;
-	@Column(name = "document_path", nullable = true)
-	private String file_upload;
+	@Column(name = "file_location", nullable = true)
+	private String document_Path;
 	@Column(name = "deadline_at")
 	private String deadline;
 
 	public Ticket() {
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
-		this.setUpdated_at(timestamp.toString());
-		this.setCreated_at(timestamp.toString());
-		if (this.file_upload == "null") {
-			this.file_upload = "no_data";
-		}
+		if (this.getUpdated_at() == null)
+			setUpdated_at(timestamp.toString());
+		if (this.getCreated_at() == null)
+			this.setCreated_at(timestamp.toString());
+
 	};
 
 	public Ticket update(Ticket temp) {
@@ -54,8 +54,8 @@ public class Ticket {
 			this.setSubject(temp.subject);
 		if (temp.getDescription() != null)
 			this.setDescription(temp.description);
-		if (temp.getDocument_path() != null)
-			this.setDocument_Path(temp.file_upload);
+		if (temp.getDocument_Path() != null)
+			this.setDocument_Path(temp.document_Path);
 
 		// an automatic system for the app to update the ticket's update status
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
@@ -64,7 +64,7 @@ public class Ticket {
 	}
 
 	public Integer getId() {
-		return id;
+		return ticket_id;
 	}
 
 	public Integer getAssignee() {
@@ -99,8 +99,8 @@ public class Ticket {
 		return deadline;
 	}
 
-	public String getDocument_path() {
-		return file_upload;
+	public String getDocument_Path() {
+		return document_Path;
 	}
 
 	public String getUpdated_at() {
@@ -108,7 +108,7 @@ public class Ticket {
 	}
 
 	public void setId(Integer id) {
-		this.id = id;
+		this.ticket_id = id;
 	}
 
 	public void setAssignee(Integer assignee) {
@@ -149,8 +149,8 @@ public class Ticket {
 		this.deadline = deadline_at;
 	}
 
-	public void setDocument_Path(String file_upload_path) {
-		this.file_upload = file_upload_path;
+	public void setDocument_Path(String Document_Path) {
+		this.document_Path = Document_Path;
 	}
 
 }
