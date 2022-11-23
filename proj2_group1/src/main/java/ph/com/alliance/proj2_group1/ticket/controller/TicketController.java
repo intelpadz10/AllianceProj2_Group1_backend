@@ -48,11 +48,11 @@ public class TicketController {
 
 	}
 
-	@GetMapping("/ticket/all/status/{id}")
+	@GetMapping("/ticket/all/status/{status}")
 	@ResponseBody
-	public ApiResponse showAllTicketswithStatusN(@PathVariable int id) {
+	public ApiResponse showTicketsWithStatus(@PathVariable int status) {
 
-		List<Ticket> savedtickets = ticketService.getTicketsbyStatus(id);
+		List<Ticket> savedtickets = ticketService.getTicketsbyStatus(status);
 
 		if (savedtickets != null) {
 			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
@@ -84,7 +84,7 @@ public class TicketController {
 		Ticket savedTicket = ticketService.getTicketbyId(id);
 
 		if (savedTicket != null) {
-			if (savedTicket.getTicket_id() == newticket.getTicket_id()) {
+			if (savedTicket.getId() == newticket.getId()) {
 				return saveTicket(newticket);
 			} else {
 				return ApiResponse.CreateError(
@@ -101,8 +101,7 @@ public class TicketController {
 	public ApiResponse updateStatus(Ticket ticket) {
 
 		try {
-			Ticket savedTicket = ticketService.changeTicketStatus(ticket.getStatus_id(), ticket.getTicket_id());
-
+			Ticket savedTicket = ticketService.updateTicket(ticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
@@ -112,5 +111,4 @@ public class TicketController {
 		}
 
 	}
-
 }

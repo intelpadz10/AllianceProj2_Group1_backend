@@ -26,19 +26,4 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	@Query(value = "SELECT t FROM ticket t where t.status = 1 AND t.sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllPendingSelectedSenderTickets(@Param("sender") int sender_id);
 
-	@Modifying
-	@Query(value = "UPDATE ticket t set t.status = ? where ticket_id = ?", nativeQuery = true)
-	int changeTicketStatus(int status_code, int ticket_id);
-
-	@Modifying
-	@Query(value = "UPDATE ticket t set t.updated_at = CURRENT_TIMESTAMP where ticket_id = ?", nativeQuery = true)
-	int changeUpdateDate(int ticket_id);
-
-	@Modifying
-	@Query(value = "UPDATE ticket t set t.deadline_at = ? where ticket_id = ?", nativeQuery = true)
-	int changeDeadlineDate(String deadline_date, int id);
-
-	@Modifying
-	@Query(value = "UPDATE ticket t set t.document_path = ? where ticket_id = ?", nativeQuery = true)
-	int changeDocumentPath(String document_path, int ticket_id);
 }

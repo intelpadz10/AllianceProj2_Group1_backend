@@ -17,15 +17,16 @@ public class TicketService implements ITicketService {
 	public Ticket saveTicket(Ticket ticket) {
 		return ticketJpaRepository.saveAndFlush(ticket);
 	}
-
+	public Ticket updateTicket (Ticket ticket) {
+		Ticket getTicket = ticketJpaRepository.findById(ticket.getId()).get();
+		return ticketJpaRepository.saveAndFlush(getTicket.update(ticket));
+	}
 	public List<Ticket> getAllTickets() {
 		return ticketJpaRepository.findAll();
 	}
-
 	public Ticket getTicketbyId(Integer id) {
 		return ticketJpaRepository.findById(id).get();
 	}
-	
 	public List<Ticket> getTicketsViaAssignee(int assigneeID){
 		return ticketJpaRepository.findAllViaAssigneeTickets(assigneeID);
 	}
@@ -34,18 +35,7 @@ public class TicketService implements ITicketService {
 		return ticketJpaRepository.findAllStatusTicket(status_id);
 	}
 
-	public Ticket changeTicketStatus (Integer status, Integer id) throws Exception {
-		Ticket retieivedTicket = ticketJpaRepository.findById(id).get();
-		
-		if (retieivedTicket == null) {
-			throw new Exception ("Ticket does not exist");
-		}else {
-			retieivedTicket.setStatus_id(status);
-			 ticketJpaRepository.changeUpdateDate(id);
-			return  ticketJpaRepository.saveAndFlush(retieivedTicket); 
-		}
-		
-	}
+	
 	
 
 }
