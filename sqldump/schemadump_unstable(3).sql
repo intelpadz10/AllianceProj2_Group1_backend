@@ -1,13 +1,13 @@
--- MySQL dump 10.13  Distrib 5.7.17, for Win64 (x86_64)
+-- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
 -- Host: localhost    Database: alliancedb
 -- ------------------------------------------------------
--- Server version	5.7.21-log
+-- Server version	8.0.24
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!50503 SET NAMES utf8 */;
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -21,13 +21,13 @@
 
 DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `role_id` int(11) NOT NULL,
+  `role_id` int NOT NULL,
   `role_description` varchar(255) NOT NULL,
   `role_initials` varchar(45) NOT NULL,
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -46,13 +46,13 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
-  `status_id` int(11) NOT NULL,
+  `status_id` int NOT NULL,
   `status_name` varchar(45) NOT NULL,
   `description` varchar(255) DEFAULT '"no description"',
   PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -71,29 +71,29 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ticket`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket` (
-  `ticket_id` int(11) NOT NULL AUTO_INCREMENT,
-  `assignee_id` int(11) NOT NULL,
-  `sender_id` int(11) NOT NULL,
-  `ticket_category` int(11) NOT NULL,
-  `status` int(11) NOT NULL DEFAULT '1',
+  `ticket_id` int NOT NULL AUTO_INCREMENT,
+  `assignee_id` int NOT NULL,
+  `sender_id` int NOT NULL,
+  `ticket_category` int NOT NULL,
+  `status_id` int NOT NULL DEFAULT '1',
   `subject` varchar(45) NOT NULL,
   `description` varchar(255) DEFAULT 'no description',
-  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `deadline_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `document_path` varchar(1000) DEFAULT '"none"',
+  `file_location` varchar(455) DEFAULT 'none',
   PRIMARY KEY (`ticket_id`),
   KEY `ticket_class` (`ticket_category`),
   KEY `ticket_ibfk_1_idx` (`assignee_id`),
   KEY `ticket_ibfk_2_idx` (`sender_id`),
-  KEY `ticket_ibfk_5_idx` (`status`),
+  KEY `ticket_ibfk_5_idx` (`status_id`),
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`assignee_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `ticket_ibfk_4` FOREIGN KEY (`ticket_category`) REFERENCES `ticket_category` (`ticketcategory_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_5` FOREIGN KEY (`status`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+  CONSTRAINT `ticket_ibfk_5` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +102,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,6,6,2,1,'New Creations','Acquisition of StartupEnt Inc.','2022-11-18 00:32:21','2022-11-18 00:32:21','2022-11-18 08:51:25','\"none\"'),(2,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:32:30','2022-11-18 00:32:30','2022-12-16 04:12:12','\"none\"'),(3,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:37:25','2022-11-18 00:37:25','2022-12-16 04:12:12','\"none\"'),(4,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:37:56','2022-11-18 00:37:56','2022-12-16 04:12:12','\"none\"'),(5,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:38:20','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(6,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:38:44','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(7,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:38:47','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(8,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:38:58','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(9,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:39:27','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(10,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:39:32','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(11,5,1,1,1,'Claiming Bonuses','My bonus for creating this application','2022-11-18 00:44:00','2022-11-20 11:40:09','2022-12-16 04:12:12','\"none\"'),(12,5,1,1,1,'FREE CAR','My bonus for creating this application','2022-11-18 01:02:02','2022-11-20 11:40:09','2022-12-31 17:01:01','\"none\"'),(13,2,1,11,3,'New Acquisition','Acquisition of StartupEnt Inc.','2022-11-18 00:32:21','2022-11-20 11:40:09','2022-11-18 08:25:50','\"none\"'),(14,2,2,11,3,'New Creations','Acquisition of StartupEnt Inc.','2022-11-18 00:32:21','2022-11-20 11:40:09','2022-11-18 08:43:45','\"none\"');
+INSERT INTO `ticket` VALUES (1,2,2,1,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(2,2,2,1,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -112,16 +112,16 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `ticket_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket_category` (
-  `ticketcategory_id` int(11) NOT NULL,
+  `ticketcategory_id` int NOT NULL,
   `ticketcategory_name` varchar(45) NOT NULL,
   `description` varchar(255) NOT NULL,
-  `default_assignee` int(11) DEFAULT NULL,
+  `default_assignee` int DEFAULT NULL,
   PRIMARY KEY (`ticketcategory_id`),
   KEY `category_tbfk1_idx` (`default_assignee`),
   CONSTRAINT `category_tbfk1` FOREIGN KEY (`default_assignee`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,10 +140,10 @@ UNLOCK TABLES;
 
 DROP TABLE IF EXISTS `user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `role_id` int(11) NOT NULL,
+  `user_id` int NOT NULL AUTO_INCREMENT,
+  `role_id` int NOT NULL,
   `user_name` varchar(255) NOT NULL,
   `user_firstname` varchar(255) NOT NULL,
   `user_lastname` varchar(255) NOT NULL,
@@ -155,7 +155,7 @@ CREATE TABLE `user` (
   UNIQUE KEY `user_name_UNIQUE` (`user_name`),
   KEY `role_id_idx` (`role_id`),
   CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -185,4 +185,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-20 21:34:09
+-- Dump completed on 2022-11-23 16:29:09
