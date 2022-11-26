@@ -47,6 +47,20 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
+	@GetMapping("/ticket/all/sender/{id}")
+	@ResponseBody
+	public ApiResponse showTickets(@PathVariable final int id) {
+
+		List<Ticket> savedtickets = ticketService.getAllTicketsofSender(id);
+
+		if (savedtickets != null) {
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
+
+	}
 
 	@GetMapping("/ticket/all/status/{status}")
 	@ResponseBody
@@ -81,22 +95,20 @@ public class TicketController {
 	@ResponseBody
 	public ApiResponse update(@PathVariable int id, Ticket newticket) {
 
-		Ticket savedTicket = ticketService.getTicketbyId(id);
 
-		if (savedTicket != null) {
-			if (savedTicket.getId() == newticket.getId()) {
-				return saveTicket(newticket);
-			} else {
-				return ApiResponse.CreateError(
-						TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + TicketMessages.TICKET_ID_MISMATCH);
-			}
-		} else {
-			return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
+		try {
+			Ticket savedTicket = ticketService.updateTicket(ticket);
+			if (savedTicket != null)
+				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
+			else
+				return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE);
+		} catch (Exception e) {
+			return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE + e.getMessage());
 		}
 
 	}
 
-	@PostMapping(path = "/ticket/update-status")
+	@PostMapping(path = "/ticket/{id}/update-status")
 	@ResponseBody
 	public ApiResponse updateStatus(Ticket ticket) {
 

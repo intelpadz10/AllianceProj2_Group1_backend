@@ -24,6 +24,9 @@ public class TicketService implements ITicketService {
 	public List<Ticket> getAllTickets() {
 		return ticketJpaRepository.findAll();
 	}
+	public List<Ticket> getAllTicketsofSender(Integer id) {
+		return ticketJpaRepository.findSelectedSenderTickets(id);
+	}
 	public Ticket getTicketbyId(Integer id) {
 		return ticketJpaRepository.findById(id).get();
 	}
@@ -34,9 +37,6 @@ public class TicketService implements ITicketService {
 	public List<Ticket> getTicketsbyStatus(int status_id){
 		return ticketJpaRepository.findAllStatusTicket(status_id);
 	}
-
-	
-	
 
 }
 

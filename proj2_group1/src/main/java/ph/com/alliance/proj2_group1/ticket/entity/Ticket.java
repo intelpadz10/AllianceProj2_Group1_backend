@@ -56,6 +56,8 @@ public class Ticket {
 			this.setDescription(temp.description);
 		if (temp.getDocument_Path() != null)
 			this.setDocument_Path(temp.document_Path);
+		if (temp.getDeadline()!= null)
+			this.setDeadline_at( temp.deadline);
 
 		// an automatic system for the app to update the ticket's update status
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
