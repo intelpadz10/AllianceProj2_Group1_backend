@@ -3,6 +3,8 @@ package ph.com.alliance.proj2_group1.user.entity;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class User {
 
@@ -17,10 +19,11 @@ public class User {
 	private String user_lastname; //holds the 
 	
 	private String email;
-	
+	@JsonIgnore
 	private String password;
 	private String image_link;
-
+	
+	
 	public Integer getUser_id() {
 		return user_id;
 	}
@@ -57,7 +60,7 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
-	public String getPassword(String password) {
+	public String getPassword() {
 		return this.password; 
 	}
 

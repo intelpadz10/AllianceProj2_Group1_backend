@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -45,100 +43,72 @@ public class TicketController {
 			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
 		}
 
-		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE +"CAUSE:" +TicketMessages.TICKET_FAILED_RETRIEVED);
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
+
+	}
+
+	@GetMapping("/ticket/all/status/{status}")
+	@ResponseBody
+	public ApiResponse showTicketsWithStatus(@PathVariable int status) {
+
+		List<Ticket> savedtickets = ticketService.getTicketsbyStatus(status);
+
+		if (savedtickets != null) {
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
 
 	@GetMapping("/ticket/{id}")
 	@ResponseBody
 	public ApiResponse showTicket(@PathVariable final int id) {
-
-		Ticket savedTicket = ticketService.getTicketbyId(id);
-
-		if (savedTicket != null) {
-			return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
-		}
-
-		return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE +"CAUSE:" +TicketMessages.TICKET_FAILED_RETRIEVED);
+		
+			Ticket savedTicket = ticketService.getTicketbyId(id);
+			if (savedTicket != null) {
+				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+			} else {
+				return ApiResponse.CreateError(
+						TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + TicketMessages.TICKET_ID_MISMATCH);
+			}
+			
 	}
 
-	@RequestMapping(path = "/ticket/{id}/update", method = { RequestMethod.POST, RequestMethod.PATCH,
-			RequestMethod.PUT })
+	@PostMapping(path = "/ticket/{id}/update")
 	@ResponseBody
 	public ApiResponse update(@PathVariable int id, Ticket newticket) {
 
 		Ticket savedTicket = ticketService.getTicketbyId(id);
 
 		if (savedTicket != null) {
-			if (savedTicket.getTicket_id() == newticket.getTicket_id()) {
+			if (savedTicket.getId() == newticket.getId()) {
 				return saveTicket(newticket);
 			} else {
-				return ApiResponse.CreateError (TicketMessages.GENERIC_UNSUCCESSFUL_SAVE+" ERROR: " +TicketMessages.TICKET_ID_MISMATCH);
+				return ApiResponse.CreateError(
+						TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + TicketMessages.TICKET_ID_MISMATCH);
 			}
 		} else {
 			return ApiResponse.CreateError(TicketMessages.GENERIC_UNSUCCESSFUL_SAVE);
 		}
 
 	}
-	/*
-	 * private iTicketService service;
-	 * 
-	 * @Autowired public TicketController(final iTicketService service) {
-	 * this.service = service; }
-	 * 
-	 * 
-	 * @RequestMapping("/ticket/{id}") public String getTicket(@PathVariable final
-	 * int id) { return service.findById(id); }
-	 * 
-	 * 
-	 * @GetMapping("/ticket") public String getAllTickets() { return
-	 * service.findAll(); }
-	 * 
-	 * @RequestMapping(path ="/ticket/{id}", method = {RequestMethod.POST,
-	 * RequestMethod.PATCH, RequestMethod.PUT}) public String update(
-	 * 
-	 * @PathVariable final int id,
-	 * 
-	 * @RequestParam("status") final String status,
-	 * 
-	 * @RequestParam("assignee") final int assignee,
-	 * 
-	 * @RequestParam("subject") final String subject ,
-	 * 
-	 * @RequestParam("description") final String description,
-	 * 
-	 * @RequestParam("tracker") final String tracker,
-	 * 
-	 * @RequestParam("class") final String classType ) { if(service.updateAll(new
-	 * Ticket( id, assignee, status, subject, description,tracker,classType))== 1 ){
-	 * return "Successful Update!"; } else if (service.update(new Ticket( id,
-	 * assignee, status, subject, description,tracker,classType)) == 1){ return
-	 * "Successful Update"; } else { return "Unsuccessful Update"; }
-	 * 
-	 * }
-	 * 
-	 * @PostMapping("/ticket") public String create(
-	 * 
-	 * @RequestParam("id") final int ticketID,
-	 * 
-	 * @RequestParam("assignee") final int assignee,
-	 * 
-	 * @RequestParam("status") String status,
-	 * 
-	 * @RequestParam("subject") String subject,
-	 * 
-	 * @RequestParam("description") String description,
-	 * 
-	 * @RequestParam("tracker") String tracker,
-	 * 
-	 * @RequestParam("classType") String classType ) { String success; if
-	 * (service.createTicket(new Ticket( ticketID, assignee, status, subject,
-	 * description, tracker, classType))<= 0) { success =
-	 * "failed creation of account"; return success; } else { success =
-	 * "account has been created" ; return success; } }
-	 * 
-	 * @DeleteMapping("/ticket/delete/{id}") public int delete(@PathVariable final
-	 * int id) throws IOException { return service.deleteByID(id); }
-	 */
 
+	@PostMapping(path = "/ticket/update-status")
+	@ResponseBody
+	public ApiResponse updateStatus(Ticket ticket) {
+
+		try {
+			Ticket savedTicket = ticketService.updateTicket(ticket);
+			if (savedTicket != null)
+				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
+			else
+				return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE);
+		} catch (Exception e) {
+			return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE + e.getMessage());
+		}
+
+	}
 }

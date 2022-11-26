@@ -9,7 +9,7 @@ public interface ITicketService {
 	public Ticket saveTicket(Ticket ticket);
 	public List<Ticket> getAllTickets();
 	public Ticket getTicketbyId(Integer id);
-	
+	public Ticket updateTicket (Ticket ticket);	
 }
 
 /*
