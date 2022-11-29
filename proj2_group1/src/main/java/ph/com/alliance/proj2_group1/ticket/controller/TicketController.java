@@ -109,6 +109,5 @@ public class TicketController {
 		} catch (Exception e) {
 			return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE + e.getMessage());
 		}
-
 	}
 }

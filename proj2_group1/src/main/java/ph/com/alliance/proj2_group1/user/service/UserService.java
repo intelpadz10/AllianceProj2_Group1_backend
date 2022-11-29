@@ -33,4 +33,17 @@ public class UserService implements IUserService {
 	public User login(String email) {
 		return userJpaRepository.findByEmail(email);
 	}
+	
+	public User updateUser(User user) {
+		System.out.print(user.getUser_id());
+		User existingUser = userJpaRepository.findById(user.getUser_id()).get();
+		
+		existingUser.setUsername(user.getUsername());
+		existingUser.setfName(user.getfName());
+		existingUser.setlName(user.getlName());
+		existingUser.setEmail(user.getEmail());
+		existingUser.setPassword(user.getPassword());
+		
+		return userJpaRepository.saveAndFlush(existingUser);
+	}
 }

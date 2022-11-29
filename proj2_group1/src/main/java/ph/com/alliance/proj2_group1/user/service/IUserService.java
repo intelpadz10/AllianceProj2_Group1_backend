@@ -9,6 +9,5 @@ public interface IUserService {
 	public User saveUser(User user);
 	public List<User> getAllUsers();
 	public User getUserbyID(Integer ID);
-	
-	
+	public User updateUser(User user);
 }
