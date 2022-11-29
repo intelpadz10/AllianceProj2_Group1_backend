@@ -97,7 +97,7 @@ public class TicketController {
 
 
 		try {
-			Ticket savedTicket = ticketService.updateTicket(ticket);
+			Ticket savedTicket = ticketService.updateTicket(newticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
