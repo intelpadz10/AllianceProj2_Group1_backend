@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import ph.com.alliance.proj2_group1.common.models.ApiResponse;
+import ph.com.alliance.proj2_group1.fileUplaod.message.FileUploadMessage;
+
 @RestController
 @MultipartConfig(
 		maxFileSize = 1024 * 1024 * 40,        // 40 MB
@@ -28,17 +31,17 @@ public class fileUploadController {
 	}
 	
 	@PostMapping("/sampleUpload")
-	public String process(final HttpServletRequest request) throws IOException, ServletException
+	public ApiResponse process(final HttpServletRequest request) throws IOException, ServletException
 	{
 		try {
 			final Part part = request.getPart("file");
 			part.write(UPLOAD_PATH + getFileName(part));
 			
-			return "Upload success";
+			return ApiResponse.CreateSuccess(UPLOAD_PATH+'\''+part.getSubmittedFileName(), FileUploadMessage.FILE_SUCCESSFULLY_SAVED);
 		} catch (final IOException | ServletException exception) {
 			System.out.println("Message:" + exception.getMessage() + " Cause: " +  exception.getCause());
 			
-			return "Upload failure";
+			return ApiResponse.CreateError(FileUploadMessage.GENERIC_UNSUCCESSFUL_SAVE);
 		}
 	
 	}
