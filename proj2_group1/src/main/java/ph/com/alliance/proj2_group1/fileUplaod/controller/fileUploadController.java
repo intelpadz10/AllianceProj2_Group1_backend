@@ -18,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
 		maxRequestSize = 1024 * 1024 * 30      // 30 MB
 		)
 public class fileUploadController {
-	public static final String VIEW_PATH = "/uploadFile.html";
-	private static final String UPLOAD_PATH = "D:\\uploadhere\\";
+	public static final String VIEW_PATH = "/NewFile.html";
+	private static final String UPLOAD_PATH = "D:\\uploadhere";
 	
 	@GetMapping("/sampleUpload")
 	public ModelAndView execute()
@@ -43,18 +43,12 @@ public class fileUploadController {
 	
 	}
 	
-	/**
-	 * Gets the file name
-	 * 
-	 * @param part used to get the fileName
-	 * @return file name
-	 */
 	private String getFileName(final Part part)
 	{
 		final String contentDisposition = part.getHeader("content-disposition");
 		
 		if (!contentDisposition.contains("filename=")) {
-			return null; // no valid file can be uploaded
+			return null;
 		}
 		
 		final int beginIndex = contentDisposition.indexOf("filename=") + 10;
