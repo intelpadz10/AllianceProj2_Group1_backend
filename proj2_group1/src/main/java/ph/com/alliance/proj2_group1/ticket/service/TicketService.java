@@ -17,8 +17,8 @@ public class TicketService implements ITicketService {
 	public Ticket saveTicket(Ticket ticket) {
 		return ticketJpaRepository.saveAndFlush(ticket);
 	}
-	public Ticket updateTicket (Ticket ticket) {
-		Ticket getTicket = ticketJpaRepository.findById(ticket.getId()).get();
+	public Ticket updateTicket (Integer id, Ticket ticket) {
+		Ticket getTicket = ticketJpaRepository.findById(id).get();
 		return ticketJpaRepository.saveAndFlush(getTicket.update(ticket));
 	}
 	public List<Ticket> getAllTickets() {

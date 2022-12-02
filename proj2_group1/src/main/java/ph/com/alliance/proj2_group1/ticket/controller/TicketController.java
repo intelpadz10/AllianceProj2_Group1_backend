@@ -93,11 +93,11 @@ public class TicketController {
 
 	@PostMapping(path = "/ticket/{id}/update")
 	@ResponseBody
-	public ApiResponse update(@PathVariable int id, Ticket newticket) {
+	public ApiResponse update(@PathVariable Integer  id, Ticket newticket) {
 
 
 		try {
-			Ticket savedTicket = ticketService.updateTicket(newticket);
+			Ticket savedTicket = ticketService.updateTicket(id,newticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
@@ -110,10 +110,10 @@ public class TicketController {
 
 	@PostMapping(path = "/ticket/{id}/update-status")
 	@ResponseBody
-	public ApiResponse updateStatus(Ticket ticket) {
+	public ApiResponse updateStatus(@PathVariable Integer  id, Ticket ticket) {
 
 		try {
-			Ticket savedTicket = ticketService.updateTicket(ticket);
+			Ticket savedTicket = ticketService.updateTicket(id, ticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
