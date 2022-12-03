@@ -147,8 +147,8 @@ public class Ticket {
 		this.updated_at = updated_at;
 	}
 
-	public void setDeadline_at(String deadline_at) {
-		this.deadline = deadline_at;
+	public void setDeadline_at(String deadline) {
+		this.deadline = deadline;
 	}
 
 	public void setDocument_Path(String Document_Path) {
