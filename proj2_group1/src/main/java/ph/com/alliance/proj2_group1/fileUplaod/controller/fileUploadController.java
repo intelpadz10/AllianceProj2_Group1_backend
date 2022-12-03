@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 		)
 public class fileUploadController {
 	public static final String VIEW_PATH = "/NewFile.html";
-	private static final String UPLOAD_PATH = "D:\\uploadhere";
+	private static final String UPLOAD_PATH = "D:\\uploadhere\\";
 	
 	@GetMapping("/sampleUpload")
 	public ModelAndView execute()
