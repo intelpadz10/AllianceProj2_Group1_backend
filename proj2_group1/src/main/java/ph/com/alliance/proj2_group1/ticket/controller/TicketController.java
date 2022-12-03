@@ -3,6 +3,7 @@ package ph.com.alliance.proj2_group1.ticket.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -110,7 +111,7 @@ public class TicketController {
 
 	@PostMapping(path = "/ticket/{id}/update-status")
 	@ResponseBody
-	public ApiResponse updateStatus(@PathVariable Integer  id, Ticket ticket) {
+	public ApiResponse updateTicketStatus(@PathVariable Integer  id, Ticket ticket) {
 
 		try {
 			Ticket savedTicket = ticketService.updateTicket(id, ticket);
@@ -120,6 +121,23 @@ public class TicketController {
 				return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE);
 		} catch (Exception e) {
 			return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE + e.getMessage());
+		}
+	}
+	
+	@DeleteMapping (path = "/ticket/{id}")
+	@ResponseBody
+	public ApiResponse deleteTicketStatus (@PathVariable Integer  id, Ticket ticket) {
+		String status;
+		try {
+			if (id == ticket.getId()) {
+			 status = ticketService.deleteTicket(ticket);
+			} else  status = "Ticket Mismatch";
+			if (status == "Success Delete") 
+				return ApiResponse.CreateSuccess("Ticket "+ticket.getId()+" has been successfully deleted!");
+			else 
+				return ApiResponse.CreateError(status);
+		}catch (Exception e) {
+			return ApiResponse.CreateError("Error in e: "+ e);
 		}
 	}
 }
