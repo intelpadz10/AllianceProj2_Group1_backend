@@ -17,12 +17,15 @@ public class TicketService implements ITicketService {
 	public Ticket saveTicket(Ticket ticket) {
 		return ticketJpaRepository.saveAndFlush(ticket);
 	}
-	public Ticket updateTicket (Ticket ticket) {
-		Ticket getTicket = ticketJpaRepository.findById(ticket.getId()).get();
+	public Ticket updateTicket (Integer id, Ticket ticket) {
+		Ticket getTicket = ticketJpaRepository.findById(id).get();
 		return ticketJpaRepository.saveAndFlush(getTicket.update(ticket));
 	}
 	public List<Ticket> getAllTickets() {
 		return ticketJpaRepository.findAll();
+	}
+	public List<Ticket> getAllTicketsofSender(Integer id) {
+		return ticketJpaRepository.findSelectedSenderTickets(id);
 	}
 	public Ticket getTicketbyId(Integer id) {
 		return ticketJpaRepository.findById(id).get();
@@ -34,9 +37,6 @@ public class TicketService implements ITicketService {
 	public List<Ticket> getTicketsbyStatus(int status_id){
 		return ticketJpaRepository.findAllStatusTicket(status_id);
 	}
-
-	
-	
 
 }
 
