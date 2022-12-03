@@ -54,10 +54,10 @@ public class Ticket {
 			this.setSubject(temp.subject);
 		if (temp.getDescription() != null)
 			this.setDescription(temp.description);
-		if (temp.getDocument_Path() != null)
-			this.setDocument_Path(temp.document_Path);
+		if (temp.getdocument_path() != null)
+			this.setdocument_path(temp.document_Path);
 		if (temp.getDeadline()!= null)
-			this.setDeadline_at( temp.deadline);
+			this.setdeadline_at( temp.deadline);
 
 		// an automatic system for the app to update the ticket's update status
 		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
@@ -101,7 +101,7 @@ public class Ticket {
 		return deadline;
 	}
 
-	public String getDocument_Path() {
+	public String getdocument_path() {
 		return document_Path;
 	}
 
@@ -147,11 +147,11 @@ public class Ticket {
 		this.updated_at = updated_at;
 	}
 
-	public void setDeadline_at(String deadline) {
+	public void setdeadline_at(String deadline) {
 		this.deadline = deadline;
 	}
 
-	public void setDocument_Path(String Document_Path) {
+	public void setdocument_path(String Document_Path) {
 		this.document_Path = Document_Path;
 	}
 

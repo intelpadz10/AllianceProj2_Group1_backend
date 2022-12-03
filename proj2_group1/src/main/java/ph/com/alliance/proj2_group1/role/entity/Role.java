@@ -5,8 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "role")
 public class Role {
 
 	@Id
@@ -38,16 +40,23 @@ public class Role {
 		return initials;
 	}
 
-	public int getRoleId() {
+	public Integer getId() {
 		return role_id;
 	}
-
-	public void setdescription(String role_description) {
-		this.description = role_description;
+	public void setId(Integer id) {
+		this. role_id = id;
 	}
 
-	public void setinitials(String role_initials) {
-		this.initials = role_initials;
+	public void setrole_id(Integer role_id) {
+		this.role_id = role_id;
+	}
+	
+	public void setdescription(String description) {
+		this.description = description;
+	}
+
+	public void setinitials(String initials) {
+		this.initials = initials;
 	}
 
 }
