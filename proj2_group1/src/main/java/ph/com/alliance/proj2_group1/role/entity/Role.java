@@ -23,18 +23,18 @@ public class Role {
 	}
 
 	public Role update(Role temp) {
-		if (temp.getRoleDescription() != null)
-			this.setRoleDescription(temp.description);
-		if (temp.getRoleInitials() != null)
-			this.setRoleInitials(temp.initials);
+		if (temp.getdescription() != null)
+			this.setdescription(temp.description);
+		if (temp.getinitials() != null)
+			this.setinitials(temp.initials);
 		return this;
 	}
 
-	public String getRoleDescription() {
+	public String getdescription() {
 		return description;
 	}
 
-	public String getRoleInitials() {
+	public String getinitials() {
 		return initials;
 	}
 
@@ -42,11 +42,11 @@ public class Role {
 		return role_id;
 	}
 
-	public void setRoleDescription(String role_description) {
+	public void setdescription(String role_description) {
 		this.description = role_description;
 	}
 
-	public void setRoleInitials(String role_initials) {
+	public void setinitials(String role_initials) {
 		this.initials = role_initials;
 	}
 

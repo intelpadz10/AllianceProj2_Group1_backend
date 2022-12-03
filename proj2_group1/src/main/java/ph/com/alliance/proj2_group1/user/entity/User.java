@@ -1,5 +1,6 @@
 package ph.com.alliance.proj2_group1.user.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -9,7 +10,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
 	@Id
-	private Integer user_id;
+	@Column (name = "user_id")
+	private Integer id;
 	private Integer role_id; // holds the role id of the user 
 	private String user_name; // holds the username of the user
 	private String user_firstname; //holds the first name of the user
@@ -22,11 +24,11 @@ public class User {
 	private String image_link;
 	
 	public void setUser_id(Integer user_id) {
-		this.user_id = user_id;
+		this.id = user_id;
 	}
 	
 	public Integer getUser_id() {
-		return user_id;
+		return id;
 	}
 	
 	public void setRole_id(Integer role_id) {
@@ -37,27 +39,27 @@ public class User {
 		return role_id;
 	}
 
-	public void setUsername(String user_name) {
+	public void setuser_name(String user_name) {
 		this.user_name = user_name;
 	}
 
-	public String getUsername() {
+	public String getuser_name() {
 		return user_name;
 	}
 	
-	public void setfName(String user_firstname) {
+	public void setuser_firstname(String user_firstname) {
 		this.user_firstname = user_firstname;
 	}
 
-	public String getfName() {
+	public String getuser_firstname() {
 		return user_firstname;
 	}
 	
-	public void setlName(String user_lname) {
+	public void setuser_lastname(String user_lname) {
 		this.user_lastname = user_lname;
 	}
 	
-	public String getlName() {
+	public String getuser_lastname() {
 		return user_lastname;
 	}
 	

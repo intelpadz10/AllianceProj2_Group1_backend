@@ -38,9 +38,9 @@ public class UserService implements IUserService {
 		System.out.print(user.getUser_id());
 		User existingUser = userJpaRepository.findById(user.getUser_id()).get();
 		
-		existingUser.setUsername(user.getUsername());
-		existingUser.setfName(user.getfName());
-		existingUser.setlName(user.getlName());
+		existingUser.setuser_name(user.getuser_name());
+		existingUser.setuser_firstname(user.getuser_firstname());
+		existingUser.setuser_lastname(user.getuser_lastname());
 		existingUser.setEmail(user.getEmail());
 		existingUser.setPassword(user.getPassword());
 		
