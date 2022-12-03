@@ -2,6 +2,8 @@ package ph.com.alliance.proj2_group1.user.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -10,6 +12,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class User {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "user_id")
 	private Integer id;
 	private Integer role_id; // holds the role id of the user 
@@ -19,8 +22,8 @@ public class User {
 	
 	private String email;
 	
-	@JsonIgnore
 	private String password;
+	@Column(nullable = true)
 	private String image_link;
 	
 	public void setUser_id(Integer user_id) {

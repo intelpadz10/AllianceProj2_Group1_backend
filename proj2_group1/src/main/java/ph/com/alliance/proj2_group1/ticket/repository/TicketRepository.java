@@ -12,21 +12,24 @@ import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 
-	@Query(value = "SELECT * FROM ticket where assignee_id = :assignee", nativeQuery = true)
-	List<Ticket> findAllViaAssigneeTickets(@Param("assignee") int assignee);
 
 	/*
 	 * Status Codes 1 - pending 2 - Working 3 - On Hold 4 - Completed 5 - Cancelled
 	 * 6 - Deleted
 	 */
-	@Query(value = "SELECT *  FROM ticket  where status = :status", nativeQuery = true)
+	@Query(value = "SELECT *  FROM ticket where status_id = :status", nativeQuery = true)
 	List<Ticket> findAllStatusTicket(@Param("status") int status_id);
-
-	@Query(value = "SELECT * FROM ticket where status = 1 AND sender_id = :sender", nativeQuery = true)
+	
+	@Query(value = "SELECT * FROM ticket where status_id = :status AND sender_id = :sender", nativeQuery = true)
+	List<Ticket> findAllSenderTicketsviaStatus(@Param("status") int  status_id, @Param("sender") int sender_id);
+	
+	@Query(value = "SELECT * FROM ticket where status_id = 1 AND sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllPendingSelectedSenderTickets(@Param("sender") int sender_id);
+	
 
 	@Query(value = "SELECT * FROM ticket  where sender_id = :sender", nativeQuery = true)
 	List<Ticket> findSelectedSenderTickets(@Param("sender") int sender_id);
 	
-//	@Query (value ="SELECT * FROM ticket where ")
+	@Query(value = "SELECT * FROM ticket where assignee_id = :assignee", nativeQuery = true)
+	List<Ticket> findAllViaAssigneeTickets(@Param("assignee") int assignee);
 }
