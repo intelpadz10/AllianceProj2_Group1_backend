@@ -24,6 +24,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 
 	@Query(value = "SELECT * FROM ticket where status_id = 1 AND sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllPendingSelectedSenderTickets(@Param("sender") int sender_id);
+	
 
 	@Query(value = "SELECT * FROM ticket  where sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllTicketsBySelectedSender(@Param("sender") int sender_id);
