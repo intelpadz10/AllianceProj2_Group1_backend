@@ -28,7 +28,7 @@ public class TicketService implements ITicketService {
 	}
 
 	public List<Ticket> getAllTicketsofSender(Integer id) {
-		return ticketJpaRepository.findSelectedSenderTickets(id);
+		return ticketJpaRepository.findAllTicketsBySelectedSender(id);
 	}
 
 	public Ticket getTicketbyId(Integer id) {
@@ -36,11 +36,11 @@ public class TicketService implements ITicketService {
 	}
 
 	public List<Ticket> getTicketsViaAssignee(int assignee) {
-		return ticketJpaRepository.findAllViaAssigneeTickets(assignee);
+		return ticketJpaRepository.findAllTicketsViaAssignee(assignee);
 	}
 
 	public List<Ticket> getTicketsbyStatus(int status_id) {
-		return ticketJpaRepository.findAllStatusTicket(status_id);
+		return ticketJpaRepository.findAllTicketsByStatusID(status_id);
 	}
 
 	public String deleteTicket(Ticket ticket) {
@@ -52,41 +52,28 @@ public class TicketService implements ITicketService {
 			return "System Error:" + e;
 		}
 	}
-}
 
-/*
- * @Service public class TicketService implements iTicketService{
- * 
- * private iTicketRepository repository; private Gson gson;
- * 
- * @Autowired public TicketService(final iTicketRepository repository) {
- * this.repository = repository; this.gson = new Gson(); }
- * 
- * public String findById(final int id) { return
- * gson.toJson(repository.findById(id)); }
- * 
- * public String findAll() { return gson.toJson(repository.findAll()); }
- * 
- * 
- * public int update(final Ticket ticket) {
- * 
- * if (ticket.getAssignee()!= 0 && ticket.getStatus() != "") { return
- * repository.updateByIDAssigneeStatus(ticket); }else if (ticket.getStatus() !=
- * "") { return repository.updateByIDStatus(ticket); } else
- * if(ticket.getAssignee()!= 0){ return repository.updateByIDAssignee(ticket);
- * }else{ return 0; } }
- * 
- * public int updateAll (final Ticket ticket) { if (ticket.getAssignee()!= 0 &&
- * ticket.getStatus() != "" && (ticket.getClassType() !="" &&
- * ticket.getTracker() != "" && ticket.getSubject() != "" &&
- * ticket.getDescription() != "")) { return repository.updateByIDAll(ticket);
- * }else { return 0; } }
- * 
- * public int createTicket(final Ticket ticket) { final int result =
- * repository.createTicket(ticket); return (result > 0) ? 1: 0; }
- * 
- * public int deleteByID(final int id) { return repository.deleteByID(id); }
- * 
- * }
- * 
- */
+	@Override
+	public List<Ticket> getAllAgingTickets() {
+		// TODO Auto-generated method stub
+		return ticketJpaRepository.findAllAgingTickets();
+	}
+
+	@Override
+	public List<Ticket> getAllAgingTicketsBySenderID(int sender_id) {
+		// TODO Auto-generated method stub
+		return ticketJpaRepository.findAllAgingTicketsBySender(sender_id);
+	}
+
+	@Override
+	public List<Ticket> getAllTicketsByCategory(int category) {
+		// TODO Auto-generated method stub
+		return ticketJpaRepository.findAllTicketsByCategory(category) ;
+	}
+
+	@Override
+	public List<Ticket> getAllTicketsByCategoryAndSenderID(int category, int sender_id) {
+		// TODO Auto-generated method stub
+		return ticketJpaRepository.findAllTicketsByCategoryandSenderID(category, sender_id);
+	}
+}

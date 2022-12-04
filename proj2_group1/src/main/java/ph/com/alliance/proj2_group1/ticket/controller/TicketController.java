@@ -48,6 +48,21 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
+	
+	@GetMapping("/ticket/all/aging")
+	@ResponseBody
+	public ApiResponse showAgingTickets() {
+
+		List<Ticket> savedtickets = ticketService.getAllAgingTickets();
+
+		if (savedtickets != null) {
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
+
+	}
 	@GetMapping("/ticket/all/sender/{id}")
 	@ResponseBody
 	public ApiResponse showTickets(@PathVariable final int id) {
@@ -62,12 +77,45 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
+	
+
+	
+	@GetMapping("/ticket/all/sender/{id}/aging")
+	@ResponseBody
+	public ApiResponse showAgingTickets(@PathVariable final int id) {
+
+		List<Ticket> savedtickets = ticketService.getAllAgingTicketsBySenderID(id);
+
+		if (savedtickets != null) {
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
+
+	}
+	
 
 	@GetMapping("/ticket/all/status/{status}")
 	@ResponseBody
 	public ApiResponse showTicketsWithStatus(@PathVariable int status) {
 
 		List<Ticket> savedtickets = ticketService.getTicketsbyStatus(status);
+
+		if (savedtickets != null) {
+			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		}
+
+		return ApiResponse.CreateError(
+				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
+
+	}
+	
+	@GetMapping("/ticket/all/category/{category}")
+	@ResponseBody
+	public ApiResponse showTicketviaCategory(@PathVariable int category) {
+
+		List<Ticket> savedtickets = ticketService.getAllTicketsByCategory(category);
 
 		if (savedtickets != null) {
 			return ApiResponse.CreateSuccess(savedtickets, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
