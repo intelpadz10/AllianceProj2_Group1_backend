@@ -8,8 +8,15 @@ public interface ITicketService {
 	
 	public Ticket saveTicket(Ticket ticket);
 	public List<Ticket> getAllTickets();
+	public List<Ticket> getAllAgingTickets();
+	
+	
+	public List<Ticket> getAllTicketsByCategory(int category);
+	public List<Ticket> getAllTicketsByCategoryAndSenderID(int category , int sender_id);
+	public List<Ticket> getAllAgingTicketsBySenderID(int sender_id);
 	public Ticket getTicketbyId(Integer id);
 	public Ticket updateTicket (Integer id, Ticket ticket);	
+	public String deleteTicket(Ticket ticket);
 }
 
 /*
