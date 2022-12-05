@@ -1,10 +1,10 @@
 package ph.com.alliance.proj2_group1.fileUplaod.service;
 
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+
+import ph.com.alliance.proj2_group1.fileUplaod.entity.File;
 
 @Service
 public interface IFileService {
-	public void init();
-	public void save (MultipartFile file);
+	public File saveFileToDB (File file);
 }

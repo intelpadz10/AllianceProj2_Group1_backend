@@ -10,13 +10,14 @@ import javax.servlet.http.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import ph.com.alliance.proj2_group1.common.models.ApiResponse;
+import ph.com.alliance.proj2_group1.fileUplaod.entity.File;
 import ph.com.alliance.proj2_group1.fileUplaod.message.FileUploadMessages;
-import ph.com.alliance.proj2_group1.fileUplaod.service.IFileService;
+import ph.com.alliance.proj2_group1.fileUplaod.service.FileService;
 
 @RestController
 @MultipartConfig(
@@ -26,16 +27,10 @@ import ph.com.alliance.proj2_group1.fileUplaod.service.IFileService;
 
 public class fileUploadController {
 	@Autowired
-	IFileService fileService;
+	private FileService fileService;
 	
 	public static final String VIEW_PATH = "/NewFile.html";
 	private static final String UPLOAD_PATH = "uploads";
-//	private FileService fileService;
-	
-//	public File saveFileToDatabase(File file) 
-//	{
-//		return fileService.saveFile(file);
-//	}
 	
 	@GetMapping("/sampleUpload")
 	public ModelAndView execute() {
@@ -43,17 +38,27 @@ public class fileUploadController {
 	}
 	
 	@PostMapping("/sampleUpload")
-	public ApiResponse process(final HttpServletRequest request, MultipartFile file) throws IOException, ServletException
+	@ResponseBody
+	public ApiResponse process(final HttpServletRequest request) throws IOException
 	{
 		try {
 			final Part part = request.getPart("file");
+			
+			String ticket_id = request.getParameter("ticket_id");
+			
+			File file = new File();
+			file.setPath(UPLOAD_PATH + getFileName(part));
+			file.setTicketID(Integer.parseInt(ticket_id.toString()));
 			part.write(UPLOAD_PATH + getFileName(part));
 			
-//			saveFileToDatabase(file);
+			File DBFile = fileService.saveFileToDB(file);
+			if(DBFile != null) {
+				return ApiResponse.CreateSuccess(DBFile, FileUploadMessages.FILE_SUCCESSFULLY_SAVED);
+			}
 			
-			fileService.save(file);
+			return ApiResponse.CreateError(FileUploadMessages.GENERIC_UNSUCCESSFUL_SAVE);
 			
-			return ApiResponse.CreateSuccess(UPLOAD_PATH+'\''+part.getSubmittedFileName(), FileUploadMessages.FILE_SUCCESSFULLY_SAVED);
+			
 		} catch (final IOException | ServletException exception) {
 			System.out.println("Message:" + exception.getMessage() + " Cause: " +  exception.getCause());
 			
