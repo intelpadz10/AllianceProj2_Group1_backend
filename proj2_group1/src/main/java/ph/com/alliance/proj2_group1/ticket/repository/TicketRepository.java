@@ -26,8 +26,11 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	@Query(value = "SELECT * FROM ticket  where sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllTicketsBySelectedSender(@Param("sender") int sender_id);
 	
-	@Query (value ="SELECT * FROM ticket WHERE deadline_at < NOW()", nativeQuery = true)
+	@Query (value ="SELECT * FROM ticket WHERE deadline_at < NOW() AND status_id <4 ", nativeQuery = true)
 	List<Ticket> findAllAgingTickets ();
+	
+	@Query (value ="SELECT * FROM ticket WHERE deadline_at < NOW() AND status_id <4  AND ticket_category = :category", nativeQuery = true)
+	List<Ticket> findAllAgingTicketsByCategory (@Param("category") int category_id);
 	
 	@Query (value = "SELECT * FROM ticket WHERE sender_id = :sender AND deadline_at < NOW()", nativeQuery = true)
 	List<Ticket> findAllAgingTicketsBySender(@Param("sender") int sender_id);

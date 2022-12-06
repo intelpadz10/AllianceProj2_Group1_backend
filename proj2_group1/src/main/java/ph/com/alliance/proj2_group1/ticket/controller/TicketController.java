@@ -19,12 +19,17 @@ import ph.com.alliance.proj2_group1.export.service.CsvExportService;
 import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 import ph.com.alliance.proj2_group1.ticket.service.TicketService;
+import ph.com.alliance.proj2_group1.ticket_category.entity.Ticket_Category;
+import ph.com.alliance.proj2_group1.ticket_category.service.TicketCategoryService;
 
 @RestController
 public class TicketController {
 
 	@Autowired
 	private TicketService ticketService;
+	
+	@Autowired
+	private TicketCategoryService categoryService;
 	
 	@Autowired
     private  CsvExportService csvExportService;
@@ -197,10 +202,27 @@ public class TicketController {
 		}
 	}
 	
+	//REQUEST CSV HERE
+	
 	@RequestMapping(path = "/tickets/csv")
-    public void getAllEmployeesInCsv(HttpServletResponse servletResponse) throws IOException {
+    public void getAllTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
         servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"employees.csv\"");
-        csvExportService.writeTicketsToCsv(servletResponse.getWriter());
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AllTickets.csv\"");
+        csvExportService.printAllTicketstoCSV(servletResponse.getWriter());
+    }
+	
+	@RequestMapping(path = "/tickets/aging/csv")
+    public void getAllAgingTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
+        servletResponse.setContentType("text/csv");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AgingTickets.csv\"");
+        csvExportService.printAllAgingTicketstoCSV(servletResponse.getWriter());
+    }
+	
+	@RequestMapping (path = "/tickets/aging/category/{id}/csv")
+	public void getAllAgingTicketsbyCategorytoCSV(HttpServletResponse servletResponse,@PathVariable Integer  id ) throws IOException {
+        Ticket_Category category = categoryService.getCategorybyID(id);
+		servletResponse.setContentType("text/csv");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AgaingTicketsofthe"+category.getTicketCategory_name()+"Category.csv\"");
+        csvExportService.printAllAgingTicketsbyCategorytoCSV(servletResponse.getWriter(),category);
     }
 }
