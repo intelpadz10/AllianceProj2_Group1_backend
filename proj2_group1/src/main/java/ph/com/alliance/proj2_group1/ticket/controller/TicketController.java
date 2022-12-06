@@ -1,16 +1,21 @@
 package ph.com.alliance.proj2_group1.ticket.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ph.com.alliance.proj2_group1.common.models.ApiResponse;
+import ph.com.alliance.proj2_group1.export.service.CsvExportService;
 import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 import ph.com.alliance.proj2_group1.ticket.service.TicketService;
@@ -20,6 +25,9 @@ public class TicketController {
 
 	@Autowired
 	private TicketService ticketService;
+	
+	@Autowired
+    private  CsvExportService csvExportService;
 
 	@PostMapping("/ticket/create")
 	@ResponseBody
@@ -188,4 +196,11 @@ public class TicketController {
 			return ApiResponse.CreateError("Error in e: "+ e);
 		}
 	}
+	
+	@RequestMapping(path = "/tickets/csv")
+    public void getAllEmployeesInCsv(HttpServletResponse servletResponse) throws IOException {
+        servletResponse.setContentType("text/csv");
+        servletResponse.addHeader("Content-Disposition","attachment; filename=\"employees.csv\"");
+        csvExportService.writeTicketsToCsv(servletResponse.getWriter());
+    }
 }

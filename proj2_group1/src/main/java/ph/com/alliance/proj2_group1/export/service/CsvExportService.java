@@ -21,14 +21,16 @@ public class CsvExportService {
 	@Autowired
 	private UserRepository userRepository;
 
-	public void writeEmployeesToCsv(Writer writer) {
+	public void writeTicketsToCsv(Writer writer) {
 
-		List <User> users = userRepository.findAll();
+		List<User> users = userRepository.findAll();
 		List<Ticket> tickets = ticketRepository.findAll();
 		try (CSVPrinter csvPrinter = new CSVPrinter(writer, CSVFormat.DEFAULT)) {
 			for (Ticket ticket : tickets) {
-				csvPrinter.printRecord(ticket.getId(), ticket.getSubject(),ticket.getDescription(), ticket.getAssignee(), ticket.getAssignee(),
-						ticket.getCategory());
+				csvPrinter.printRecord(ticket.getId(), ticket.getSubject(), ticket.getDescription(),
+						users.get(ticket.getAssignee()).getuser_firstname(),
+						users.get(ticket.getAssignee()).getuser_lastname(), 
+						ticket.getAssignee(), ticket.getCategory());
 			}
 		} catch (Exception e) {
 			System.out.print(e);
