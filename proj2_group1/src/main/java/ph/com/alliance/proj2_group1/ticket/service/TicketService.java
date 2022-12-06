@@ -36,7 +36,7 @@ public class TicketService implements ITicketService {
 	}
 
 	public List<Ticket> getTicketsViaAssignee(int assignee) {
-		return ticketJpaRepository.findAllTicketsViaAssignee(assignee);
+		return ticketJpaRepository.findAllTicketsbyAssignee(assignee);
 	}
 
 	public List<Ticket> getTicketsbyStatus(int status_id) {

@@ -38,4 +38,6 @@ public interface TicketRepository extends JpaRepository<Ticket, Integer> {
 	@Query (value ="SELECT * FROM ticket WHERE ticket_category = :category AND sender_id = :sender", nativeQuery = true)
 	List<Ticket> findAllTicketsByCategoryandSenderID(@Param("category") int category_id,@Param("sender") int sender_id);
 
+	@Query (value = "SELECT * from ticket where assignee_id = :assignee")
+	List<Ticket>findAllTicketsbyAssignee(@Param ("asignee") int assignee_id);
 }
