@@ -10,4 +10,6 @@ public interface IUserService {
 	public List<User> getAllUsers();
 	public User getUserbyID(Integer ID);
 	public User updateUser(User user);
+	public User login(String email);
+	public User updatePassword(String email, String password);
 }

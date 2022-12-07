@@ -18,10 +18,9 @@ public class User {
 	private String user_name; // holds the username of the user
 	private String user_firstname; //holds the first name of the user
 	private String user_lastname; //holds the 
-	
 	private String email;
-	
 	private String password;
+	
 	@Column(nullable = true)
 	private String image_link;
 	

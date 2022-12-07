@@ -84,10 +84,23 @@ public class UserController {
 		User savedUser = userService.updateUser(newuser);
 
 		if (savedUser != null) {
-				return ApiResponse.CreateError(
+				return ApiResponse.CreateSuccess(
 						UserMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + UserMessages.USER_SUCCESSFULLY_SAVED);
 		} else {
 			return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
+		}
+	}
+	
+	@PostMapping(path = "/forgotpassword")
+	@ResponseBody
+	public ApiResponse updatePassword(@RequestParam ("email") String email, @RequestParam("password") String password) {
+
+		User savedUser = userService.updatePassword(email, password);
+
+		if (savedUser != null) {
+				return ApiResponse.CreateSuccess(savedUser, UserMessages.UPDATEPASS_SUCCESS);
+		} else {
+			return ApiResponse.CreateError(UserMessages.UPDATEPASS_FAIL);
 		}
 	}
 }

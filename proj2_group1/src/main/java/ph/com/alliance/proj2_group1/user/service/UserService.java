@@ -13,7 +13,7 @@ public class UserService implements IUserService {
 
 	@Autowired
 	private UserRepository userJpaRepository;
-
+	
 	//for id creation and update
 	public User saveUser(User user) {
 		return userJpaRepository.saveAndFlush(user);
@@ -29,11 +29,6 @@ public class UserService implements IUserService {
 		return userJpaRepository.findById(id).get();
 	}
 	
-	//user login
-	public User login(String email) {
-		return userJpaRepository.findByEmail(email);
-	}
-	
 	public User updateUser(User user) {
 		System.out.print(user.getUser_id());
 		User existingUser = userJpaRepository.findById(user.getUser_id()).get();
@@ -43,6 +38,26 @@ public class UserService implements IUserService {
 		existingUser.setuser_lastname(user.getuser_lastname());
 		existingUser.setEmail(user.getEmail());
 		existingUser.setPassword(user.getPassword());
+		
+		return userJpaRepository.saveAndFlush(existingUser);
+	}
+	
+	//user login
+	public User login(String email) {
+		return userJpaRepository.findByEmail(email);
+	}
+	
+	@Override
+	public User updatePassword(String email, String password) {
+//		System.out.print(user.getUser_id());
+		
+		User existingUser = userJpaRepository.findByEmail(email);
+		
+		existingUser.setuser_name(existingUser.getuser_name());
+		existingUser.setuser_firstname(existingUser.getuser_firstname());
+		existingUser.setuser_lastname(existingUser.getuser_lastname());
+		existingUser.setEmail(existingUser.getEmail());
+		existingUser.setPassword(password);
 		
 		return userJpaRepository.saveAndFlush(existingUser);
 	}
