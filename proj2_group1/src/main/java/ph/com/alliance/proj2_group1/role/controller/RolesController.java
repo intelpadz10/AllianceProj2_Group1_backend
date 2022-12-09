@@ -3,6 +3,7 @@ package ph.com.alliance.proj2_group1.role.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,8 @@ import ph.com.alliance.proj2_group1.common.models.ApiResponse;
 import ph.com.alliance.proj2_group1.role.entity.Role;
 import ph.com.alliance.proj2_group1.role.message.RoleMessages;
 import ph.com.alliance.proj2_group1.role.service.RoleService;
+import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
+import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 
 @RestController
 public class RolesController {
@@ -61,4 +64,40 @@ public class RolesController {
 			}
 			
 	}
+	
+	@DeleteMapping (path = "/role/{id}")
+	@ResponseBody
+	public ApiResponse deleteRole (@PathVariable Integer  id, Role role) {
+		String status;
+		try {
+			if (id == role.getId()) {
+			 status = roleService.deleteRole(role);
+			} else  status = "Role Mismatch";
+			if (status == "Success Delete") 
+				return ApiResponse.CreateSuccess("Role "+role.getId()+" has been successfully deleted!");
+			else 
+				return ApiResponse.CreateError(status);
+		}catch (Exception e) {
+			return ApiResponse.CreateError("Error in e: "+ e);
+		}
+	}
+	
+	@PostMapping(path = "/role/{id}/update")
+	@ResponseBody
+	public ApiResponse updateRole(@PathVariable Integer  id, Role  	newRole) {
+
+
+		try {
+			Role savedRole = roleService.updateRole(id,newRole);
+			if (savedRole != null)
+				return ApiResponse.CreateSuccess(savedRole, RoleMessages.ROLE_SUCCESSFULLY_UPDATED);
+			else
+				return ApiResponse.CreateError(RoleMessages.ROLE_FAILED_UPDATED);
+		} catch (Exception e) {
+			return ApiResponse.CreateError(RoleMessages.ROLE_FAILED_UPDATED + e.getMessage());
+		}
+
+	}
+	
+	
 }
