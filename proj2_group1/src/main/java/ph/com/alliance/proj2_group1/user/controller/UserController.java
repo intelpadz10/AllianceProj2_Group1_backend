@@ -3,6 +3,8 @@ package ph.com.alliance.proj2_group1.user.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,13 +13,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ph.com.alliance.proj2_group1.common.models.ApiResponse;
-//import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
-//import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 import ph.com.alliance.proj2_group1.user.entity.User;
 import ph.com.alliance.proj2_group1.user.message.UserMessages;
 import ph.com.alliance.proj2_group1.user.service.UserService;
 
 @RestController
+@CrossOrigin
 public class UserController {
 
 	@Autowired
@@ -102,5 +103,18 @@ public class UserController {
 		} else {
 			return ApiResponse.CreateError(UserMessages.UPDATEPASS_FAIL);
 		}
+	}
+	
+	@DeleteMapping (path = "/user/delete/{id}")
+	@ResponseBody
+	public ApiResponse deleteUser (@PathVariable Integer id) {
+		User user = userService.getUserbyID(id);
+		
+		if (user != null ) {
+			userService.deleteUser(id);
+			
+			return ApiResponse.CreateSuccess(user, UserMessages.USER_SUCCESSFULLY_DELETED);
+		} 
+		return ApiResponse.CreateError(UserMessages.USER_DELET_FAILED);
 	}
 }

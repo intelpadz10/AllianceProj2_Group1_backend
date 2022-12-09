@@ -47,6 +47,10 @@ public class UserService implements IUserService {
 		return userJpaRepository.findByEmail(email);
 	}
 	
+	public void deleteUser(Integer id) {
+		userJpaRepository.deleteById(id);
+	}
+	
 	@Override
 	public User updatePassword(String email, String password) {
 //		System.out.print(user.getUser_id());

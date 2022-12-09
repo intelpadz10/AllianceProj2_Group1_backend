@@ -3,6 +3,7 @@ package ph.com.alliance.proj2_group1.ticket_category.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -14,6 +15,7 @@ import ph.com.alliance.proj2_group1.ticket_category.message.TicketCategoryMessag
 import ph.com.alliance.proj2_group1.ticket_category.service.TicketCategoryService;
 
 @RestController
+@CrossOrigin
 public class TicketCategoryController {
 
 	@Autowired

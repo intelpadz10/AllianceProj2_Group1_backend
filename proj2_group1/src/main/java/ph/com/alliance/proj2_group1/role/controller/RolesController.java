@@ -3,6 +3,7 @@ package ph.com.alliance.proj2_group1.role.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,6 +16,7 @@ import ph.com.alliance.proj2_group1.role.message.RoleMessages;
 import ph.com.alliance.proj2_group1.role.service.RoleService;
 
 @RestController
+@CrossOrigin
 public class RolesController {
 	
 	@Autowired

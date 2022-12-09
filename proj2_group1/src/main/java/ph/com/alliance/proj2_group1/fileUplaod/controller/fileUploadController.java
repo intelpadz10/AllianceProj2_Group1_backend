@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,6 +21,7 @@ import ph.com.alliance.proj2_group1.fileUplaod.message.FileUploadMessages;
 import ph.com.alliance.proj2_group1.fileUplaod.service.FileService;
 
 @RestController
+@CrossOrigin
 @MultipartConfig(
 		maxFileSize = 1024 * 1024 * 40,        // 40 MB
 		maxRequestSize = 1024 * 1024 * 30      // 30 MB

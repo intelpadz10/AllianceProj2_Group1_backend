@@ -11,4 +11,7 @@ public interface UserMessages extends Messages {
 	String UPDATEPASS_SUCCESS = "Password has been changed";
 	String UPDATEPASS_FAIL = "Try again";
 	
+	String USER_SUCCESSFULLY_DELETED = "Successfully deleted";
+	String USER_DELET_FAILED = "user not deleted";
+		
 }

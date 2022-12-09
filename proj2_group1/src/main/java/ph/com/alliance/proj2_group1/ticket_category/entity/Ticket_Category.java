@@ -45,5 +45,4 @@ public class Ticket_Category {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
 }
