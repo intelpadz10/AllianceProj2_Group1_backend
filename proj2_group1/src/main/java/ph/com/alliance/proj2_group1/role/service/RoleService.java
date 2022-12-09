@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ph.com.alliance.proj2_group1.role.entity.Role;
 import ph.com.alliance.proj2_group1.role.repository.RoleRepository;
+import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 
 @Service
 public class RoleService implements IRoleService {
@@ -33,5 +34,15 @@ public class RoleService implements IRoleService {
 	public Role createRole (Role role) {
 		return roleJpaRepository.saveAndFlush(role);
 		
+	}
+	
+	public String deleteRole(Role role) {
+		try {
+			roleJpaRepository.delete(role);
+			return "Success Delete";
+		} catch (Exception e) {
+			System.out.print(e);
+			return "System Error:" + e;
+		}
 	}
 }
