@@ -32,127 +32,76 @@ public class Ticket {
 	@Column(nullable = true)
 	private String updated_at;
 	@Column(name = "file_location", nullable = true)
-	private String document_Path;
+	private String document_path;
 	@Column(name = "deadline_at")
 	private String deadline;
-
-	public Ticket() {
-		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
-		if (this.getUpdated_at() == null)
-			setUpdated_at(timestamp.toString());
-		if (this.getCreated_at() == null)
-			this.setCreated_at(timestamp.toString());
-
-	};
-
-	public Ticket update(Ticket temp) {
-		if (temp.getAssignee() != null)
-			this.setAssignee(temp.assignee);
-		if (temp.getStatus() != null)
-			this.setStatus(temp.status);
-		if (temp.getSubject() != null)
-			this.setSubject(temp.subject);
-		if (temp.getDescription() != null)
-			this.setDescription(temp.description);
-		if (temp.getdocument_path() != null)
-			this.setdocument_path(temp.document_Path);
-		if (temp.getDeadline()!= null)
-			this.setdeadline_at( temp.deadline);
-
-		// an automatic system for the app to update the ticket's update status
-		Timestamp timestamp = Timestamp.valueOf(LocalDateTime.now(ZoneId.of("UTC")));
-		this.setUpdated_at(timestamp.toString());
-		return this;
-	}
-
-	public Integer getId() {
+	public Integer getTicket_id() {
 		return ticket_id;
 	}
-
+	public void setTicket_id(Integer ticket_id) {
+		this.ticket_id = ticket_id;
+	}
 	public Integer getAssignee() {
 		return assignee;
 	}
-
-	public Integer getSender() {
-		return sender;
-	}
-
-	public Integer getCategory() {
-		return category;
-	}
-
-	public Integer getStatus() {
-		return status;
-	}
-
-	public String getSubject() {
-		return subject;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public String getCreated_at() {
-		return created_at;
-	}
-
-	public String getDeadline() {
-		return deadline;
-	}
-
-	public String getdocument_path() {
-		return document_Path;
-	}
-
-	public String getUpdated_at() {
-		return updated_at;
-	}
-
-	public void setId(Integer id) {
-		this.ticket_id = id;
-	}
-
 	public void setAssignee(Integer assignee) {
 		this.assignee = assignee;
 	}
-
+	public Integer getSender() {
+		return sender;
+	}
 	public void setSender(Integer sender) {
 		this.sender = sender;
 	}
-
+	public Integer getCategory() {
+		return category;
+	}
 	public void setCategory(Integer category) {
 		this.category = category;
 	}
-
+	public Integer getStatus() {
+		return status;
+	}
 	public void setStatus(Integer status) {
 		this.status = status;
 	}
-
-	public void setSubject(String subject) {
-
-		this.subject = subject;
-
+	public String getSubject() {
+		return subject;
 	}
-
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
+	public String getDescription() {
+		return description;
+	}
 	public void setDescription(String description) {
 		this.description = description;
 	}
-
+	public String getCreated_at() {
+		return created_at;
+	}
 	public void setCreated_at(String created_at) {
 		this.created_at = created_at;
 	}
-
+	public String getUpdated_at() {
+		return updated_at;
+	}
 	public void setUpdated_at(String updated_at) {
 		this.updated_at = updated_at;
 	}
-
-	public void setdeadline_at(String deadline) {
+	public String getDocument_path() {
+		return document_path;
+	}
+	public void setDocument_path(String document_path) {
+		this.document_path = document_path;
+	}
+	public String getDeadline() {
+		return deadline;
+	}
+	public void setDeadline(String deadline) {
 		this.deadline = deadline;
 	}
 
-	public void setdocument_path(String Document_Path) {
-		this.document_Path = Document_Path;
-	}
+
 
 }

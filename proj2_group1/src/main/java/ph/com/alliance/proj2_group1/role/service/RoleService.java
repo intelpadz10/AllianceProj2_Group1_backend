@@ -26,9 +26,8 @@ public class RoleService implements IRoleService {
 	}
 
 
-	public Role updateRole(Integer id, Role role) {
-		Role getRole =  roleJpaRepository .findById(id).get();
-		return roleJpaRepository.saveAndFlush(getRole.update(role)) ;
+	public Role updateRole(Role role) {
+		return roleJpaRepository.saveAndFlush(role) ;
 	}
 
 	public Role createRole (Role role) {

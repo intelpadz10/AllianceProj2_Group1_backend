@@ -56,7 +56,6 @@ public class RolesController {
 	@GetMapping("/role/{id}")
 	@ResponseBody
 	public ApiResponse showRole(@PathVariable final int id) {
-		
 			Role savedRole = roleService.getRolebyID(id);
 			if (savedRole != null) {
 				return ApiResponse.CreateSuccess(savedRole, RoleMessages.ROLE_SUCCESSFULLY_LOADED);
@@ -67,16 +66,14 @@ public class RolesController {
 			
 	}
 	
-	@DeleteMapping (path = "/role/{id}")
+	@DeleteMapping (path = "/role/delete")
 	@ResponseBody
-	public ApiResponse deleteRole (@PathVariable Integer  id, Role role) {
+	public ApiResponse deleteRole (Role role) {
 		String status;
 		try {
-			if (id == role.getId()) {
 			 status = roleService.deleteRole(role);
-			} else  status = "Role Mismatch";
 			if (status == "Success Delete") 
-				return ApiResponse.CreateSuccess("Role "+role.getId()+" has been successfully deleted!");
+				return ApiResponse.CreateSuccess("Role "+role.getRole_id()+" has been successfully deleted!");
 			else 
 				return ApiResponse.CreateError(status);
 		}catch (Exception e) {
@@ -84,13 +81,11 @@ public class RolesController {
 		}
 	}
 	
-	@PostMapping(path = "/role/{id}/update")
+	@PostMapping(path = "/role/update")
 	@ResponseBody
-	public ApiResponse updateRole(@PathVariable Integer  id, Role  	newRole) {
-
-
+	public ApiResponse updateRole(Role 	newRole) {
 		try {
-			Role savedRole = roleService.updateRole(id,newRole);
+			Role savedRole = roleService.updateRole(newRole);
 			if (savedRole != null)
 				return ApiResponse.CreateSuccess(savedRole, RoleMessages.ROLE_SUCCESSFULLY_UPDATED);
 			else

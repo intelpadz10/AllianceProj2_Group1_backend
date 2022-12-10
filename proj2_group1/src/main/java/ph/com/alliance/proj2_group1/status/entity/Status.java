@@ -16,14 +16,6 @@ public class Status {
 
 	}
 
-	public Status update(Status temp) {
-		if (temp.getStatusName() != null)
-			this.setStatusName(temp.status_name);
-		if (temp.getDescription() != null)
-			this.setDescription(temp.description);
-		return this;
-	}
-
 	public Integer getStatusId() {
 		return status_id;
 	}
