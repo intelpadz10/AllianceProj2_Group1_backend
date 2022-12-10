@@ -29,12 +29,12 @@ public class TicketController {
 
 	@Autowired
 	private TicketService ticketService;
-	
+
 	@Autowired
 	private TicketCategoryService categoryService;
-	
+
 	@Autowired
-    private  CsvExportService csvExportService;
+	private CsvExportService csvExportService;
 
 	@PostMapping("/ticket/create")
 	@ResponseBody
@@ -63,7 +63,7 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
-	
+
 	@GetMapping("/ticket/all/aging")
 	@ResponseBody
 	public ApiResponse showAgingTickets() {
@@ -78,6 +78,7 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
+
 	@GetMapping("/ticket/all/sender/{id}")
 	@ResponseBody
 	public ApiResponse showTickets(@PathVariable final int id) {
@@ -92,9 +93,7 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
-	
 
-	
 	@GetMapping("/ticket/all/sender/{id}/aging")
 	@ResponseBody
 	public ApiResponse showAgingTickets(@PathVariable final int id) {
@@ -109,7 +108,6 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
-	
 
 	@GetMapping("/ticket/all/status/{status}")
 	@ResponseBody
@@ -125,7 +123,7 @@ public class TicketController {
 				TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + "CAUSE:" + TicketMessages.TICKET_FAILED_RETRIEVED);
 
 	}
-	
+
 	@GetMapping("/ticket/all/category/{category}")
 	@ResponseBody
 	public ApiResponse showTicketviaCategory(@PathVariable int category) {
@@ -144,24 +142,23 @@ public class TicketController {
 	@GetMapping("/ticket/{id}")
 	@ResponseBody
 	public ApiResponse showTicket(@PathVariable final int id) {
-		
-			Ticket savedTicket = ticketService.getTicketbyId(id);
-			if (savedTicket != null) {
-				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
-			} else {
-				return ApiResponse.CreateError(
-						TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + TicketMessages.TICKET_ID_MISMATCH);
-			}
-			
+
+		Ticket savedTicket = ticketService.getTicketbyId(id);
+		if (savedTicket != null) {
+			return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_RETRIEVED);
+		} else {
+			return ApiResponse.CreateError(
+					TicketMessages.GENERIC_UNSUCCESSFUL_SAVE + " ERROR: " + TicketMessages.TICKET_ID_MISMATCH);
+		}
+
 	}
 
-	@PostMapping(path = "/ticket/{id}/update")
+	@PostMapping(path = "/ticket/update")
 	@ResponseBody
-	public ApiResponse update(@PathVariable Integer  id, Ticket newticket) {
-
+	public ApiResponse update(Ticket newticket) {
 
 		try {
-			Ticket savedTicket = ticketService.updateTicket(id,newticket);
+			Ticket savedTicket = ticketService.updateTicket(newticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
@@ -172,12 +169,12 @@ public class TicketController {
 
 	}
 
-	@PostMapping(path = "/ticket/{id}/update-status")
+	@PostMapping(path = "/ticket/update-status")
 	@ResponseBody
-	public ApiResponse updateTicketStatus(@PathVariable Integer  id, Ticket ticket) {
+	public ApiResponse updateTicketStatus(Ticket ticket) {
 
 		try {
-			Ticket savedTicket = ticketService.updateTicket(id, ticket);
+			Ticket savedTicket = ticketService.updateTicket(ticket);
 			if (savedTicket != null)
 				return ApiResponse.CreateSuccess(savedTicket, TicketMessages.TICKET_SUCCESSFULLY_UPDATED);
 			else
@@ -186,45 +183,47 @@ public class TicketController {
 			return ApiResponse.CreateError(TicketMessages.TICKET_FAILED_UPDATE + e.getMessage());
 		}
 	}
-	
-	@DeleteMapping (path = "/ticket/{id}")
+
+	@DeleteMapping(path = "/ticket/delete")
 	@ResponseBody
-	public ApiResponse deleteTicketStatus (@PathVariable Integer  id, Ticket ticket) {
+	public ApiResponse deleteTicketStatus(Ticket ticket) {
 		String status;
 		try {
-			if (id == ticket.getId()) {
-			 status = ticketService.deleteTicket(ticket);
-			} else  status = "Ticket Mismatch";
-			if (status == "Success Delete") 
-				return ApiResponse.CreateSuccess("Ticket "+ticket.getId()+" has been successfully deleted!");
-			else 
+
+			status = ticketService.deleteTicket(ticket);
+
+			if (status == "Success Delete")
+				return ApiResponse.CreateSuccess("Ticket " + ticket.getTicket_id() + " has been successfully deleted!");
+			else
 				return ApiResponse.CreateError(status);
-		}catch (Exception e) {
-			return ApiResponse.CreateError("Error in e: "+ e);
+		} catch (Exception e) {
+			return ApiResponse.CreateError("Error in e: " + e);
 		}
 	}
-	
-	//REQUEST CSV HERE
-	
+
+	// REQUEST CSV HERE
+
 	@RequestMapping(path = "/tickets/csv")
-    public void getAllTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
-        servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AllTickets.csv\"");
-        csvExportService.printAllTicketstoCSV(servletResponse.getWriter());
-    }
-	
-	@RequestMapping(path = "/tickets/aging/csv")
-    public void getAllAgingTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
-        servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AgingTickets.csv\"");
-        csvExportService.printAllAgingTicketstoCSV(servletResponse.getWriter());
-    }
-	
-	@RequestMapping (path = "/tickets/aging/category/{id}/csv")
-	public void getAllAgingTicketsbyCategorytoCSV(HttpServletResponse servletResponse,@PathVariable Integer  id ) throws IOException {
-        Ticket_Category category = categoryService.getCategorybyID(id);
+	public void getAllTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
 		servletResponse.setContentType("text/csv");
-        servletResponse.addHeader("Content-Disposition","attachment; filename=\"AgaingTicketsofthe"+category.getTicketCategory_name()+"Category.csv\"");
-        csvExportService.printAllAgingTicketsbyCategorytoCSV(servletResponse.getWriter(),category);
-    }
+		servletResponse.addHeader("Content-Disposition", "attachment; filename=\"AllTickets.csv\"");
+		csvExportService.printAllTicketstoCSV(servletResponse.getWriter());
+	}
+
+	@RequestMapping(path = "/tickets/aging/csv")
+	public void getAllAgingTicketstoCSV(HttpServletResponse servletResponse) throws IOException {
+		servletResponse.setContentType("text/csv");
+		servletResponse.addHeader("Content-Disposition", "attachment; filename=\"AgingTickets.csv\"");
+		csvExportService.printAllAgingTicketstoCSV(servletResponse.getWriter());
+	}
+
+	@RequestMapping(path = "/tickets/aging/category/{id}/csv")
+	public void getAllAgingTicketsbyCategorytoCSV(HttpServletResponse servletResponse, @PathVariable Integer id)
+			throws IOException {
+		Ticket_Category category = categoryService.getCategorybyID(id);
+		servletResponse.setContentType("text/csv");
+		servletResponse.addHeader("Content-Disposition",
+				"attachment; filename=\"AgaingTicketsofthe" + category.getTicketCategory_name() + "Category.csv\"");
+		csvExportService.printAllAgingTicketsbyCategorytoCSV(servletResponse.getWriter(), category);
+	}
 }

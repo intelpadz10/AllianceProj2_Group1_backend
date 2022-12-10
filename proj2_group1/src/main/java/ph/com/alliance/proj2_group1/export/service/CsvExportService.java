@@ -38,13 +38,13 @@ public class CsvExportService {
 			csvPrinter.printRecord("TICKET ID", "TICKET SUBJECT", "TICKET DESCRIPTION", "SENDER NAME", "ASSIGNEE NAME",
 					"TICKET CATEGORY", "TICKET STATUS", "DOCUMENT PATH", "DEADLINE OF TICKET");
 			for (Ticket ticket : tickets) {
-				csvPrinter.printRecord(ticket.getId(), ticket.getSubject(), ticket.getDescription(),
+				csvPrinter.printRecord(ticket.getTicket_id(), ticket.getSubject(), ticket.getDescription(),
 						userRepository.findById(ticket.getSender()).get().getuser_firstname() + " "
 								+ userRepository.findById(ticket.getSender()).get().getuser_lastname(),
 						userRepository.findById(ticket.getAssignee()).get().getuser_firstname() + " "
 								+ userRepository.findById(ticket.getAssignee()).get().getuser_lastname(),
 						categoryRepository.findById(ticket.getCategory()).get().getTicketCategory_name(),
-						statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getdocument_path(),ticket.getDeadline());
+						statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getDocument_path(),ticket.getDeadline());
 			}
 		} catch (Exception e) {
 			System.out.print(e);
@@ -58,13 +58,13 @@ public class CsvExportService {
 				csvPrinter.printRecord("TICKET ID", "TICKET SUBJECT", "TICKET DESCRIPTION", "SENDER NAME", "ASSIGNEE NAME",
 						"TICKET CATEGORY", "TICKET STATUS", "DOCUMENT PATH","DEADLINE OF TICKET");
 				for (Ticket ticket : tickets) {
-					csvPrinter.printRecord(ticket.getId(), ticket.getSubject(), ticket.getDescription(),
+					csvPrinter.printRecord(ticket.getTicket_id(), ticket.getSubject(), ticket.getDescription(),
 							userRepository.findById(ticket.getSender()).get().getuser_firstname() + " "
 									+ userRepository.findById(ticket.getSender()).get().getuser_lastname(),
 							userRepository.findById(ticket.getAssignee()).get().getuser_firstname() + " "
 									+ userRepository.findById(ticket.getAssignee()).get().getuser_lastname(),
 							categoryRepository.findById(ticket.getCategory()).get().getTicketCategory_name(),
-							statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getdocument_path(),ticket.getDeadline());
+							statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getDocument_path(),ticket.getDeadline());
 				}
 			} catch (Exception e) {
 				System.out.print(e);
@@ -79,13 +79,13 @@ public class CsvExportService {
 				csvPrinter.printRecord("TICKET ID", "TICKET SUBJECT", "TICKET DESCRIPTION", "SENDER NAME", "ASSIGNEE NAME",
 						"TICKET CATEGORY", "TICKET STATUS", "DOCUMENT PATH","DEADLINE OF TICKET");
 				for (Ticket ticket : tickets) {
-					csvPrinter.printRecord(ticket.getId(), ticket.getSubject(), ticket.getDescription(),
+					csvPrinter.printRecord(ticket.getTicket_id(), ticket.getSubject(), ticket.getDescription(),
 							userRepository.findById(ticket.getSender()).get().getuser_firstname() + " "
 									+ userRepository.findById(ticket.getSender()).get().getuser_lastname(),
 							userRepository.findById(ticket.getAssignee()).get().getuser_firstname() + " "
 									+ userRepository.findById(ticket.getAssignee()).get().getuser_lastname(),
 							categoryRepository.findById(ticket.getCategory()).get().getTicketCategory_name(),
-							statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getdocument_path(),ticket.getDeadline());
+							statusRepository.findById(ticket.getStatus()).get().getStatusName(), ticket.getDocument_path(),ticket.getDeadline());
 				}
 			} catch (Exception e) {
 				System.out.print(e);
