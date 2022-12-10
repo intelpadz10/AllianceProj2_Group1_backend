@@ -11,12 +11,6 @@ import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Integer> {
-
-
-	/*
-	 * Status Codes 1 - pending 2 - Working 3 - On Hold 4 - Completed 5 - Cancelled
-	 * 6 - Deleted
-	 */
 	@Query(value = "SELECT *  FROM ticket where status_id = :status", nativeQuery = true)
 	List<Ticket> findAllTicketsByStatusID(@Param("status") int status_id);
 

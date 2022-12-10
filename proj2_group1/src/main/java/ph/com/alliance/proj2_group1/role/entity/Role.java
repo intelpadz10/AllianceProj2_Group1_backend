@@ -37,33 +37,4 @@ public class Role {
 	public void setInitials(String initials) {
 		this.initials = initials;
 	}
-
-
-//	public Role() {}
-//
-	
-//
-//	public String getdescription() {
-//		return description;
-//	}
-//
-//	public String getinitials() {
-//		return initials;
-//	}
-//
-//	public Integer getId() {
-//		return role_id;
-//	}
-//	public void setId(Integer id) {
-//		this. role_id = id;
-//	}
-//
-//	public void setdescription(String description) {
-//		this.description = description;
-//	}
-//
-//	public void setinitials(String initials) {
-//		this.initials = initials;
-//	}
-
 }

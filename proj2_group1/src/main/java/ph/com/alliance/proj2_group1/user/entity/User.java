@@ -14,10 +14,10 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column (name = "user_id")
 	private Integer id;
-	private Integer role_id; // holds the role id of the user 
-	private String user_name; // holds the username of the user
-	private String user_firstname; //holds the first name of the user
-	private String user_lastname; //holds the 
+	private Integer role_id; 
+	private String user_name; 
+	private String user_firstname; 
+	private String user_lastname; 
 	private String email;
 	private String password;
 	

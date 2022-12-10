@@ -55,25 +55,21 @@ public class TicketService implements ITicketService {
 
 	@Override
 	public List<Ticket> getAllAgingTickets() {
-		// TODO Auto-generated method stub
 		return ticketJpaRepository.findAllAgingTickets();
 	}
 
 	@Override
 	public List<Ticket> getAllAgingTicketsBySenderID(int sender_id) {
-		// TODO Auto-generated method stub
 		return ticketJpaRepository.findAllAgingTicketsBySender(sender_id);
 	}
 
 	@Override
 	public List<Ticket> getAllTicketsByCategory(int category) {
-		// TODO Auto-generated method stub
 		return ticketJpaRepository.findAllTicketsByCategory(category) ;
 	}
 
 	@Override
 	public List<Ticket> getAllTicketsByCategoryAndSenderID(int category, int sender_id) {
-		// TODO Auto-generated method stub
 		return ticketJpaRepository.findAllTicketsByCategoryandSenderID(category, sender_id);
 	}
 }

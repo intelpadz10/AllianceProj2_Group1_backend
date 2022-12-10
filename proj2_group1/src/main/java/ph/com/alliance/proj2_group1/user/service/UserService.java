@@ -60,7 +60,6 @@ public class UserService implements IUserService {
 	
 	@Override
 	public User updatePassword(String email, String password) {
-//		System.out.print(user.getUser_id());
 		
 		User existingUser = userJpaRepository.findByEmail(email);
 		
