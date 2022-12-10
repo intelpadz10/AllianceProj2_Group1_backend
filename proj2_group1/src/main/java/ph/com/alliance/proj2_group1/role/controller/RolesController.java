@@ -15,8 +15,6 @@ import ph.com.alliance.proj2_group1.common.models.ApiResponse;
 import ph.com.alliance.proj2_group1.role.entity.Role;
 import ph.com.alliance.proj2_group1.role.message.RoleMessages;
 import ph.com.alliance.proj2_group1.role.service.RoleService;
-import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
-import ph.com.alliance.proj2_group1.ticket.message.TicketMessages;
 
 @RestController
 @CrossOrigin
@@ -98,8 +96,5 @@ public class RolesController {
 		} catch (Exception e) {
 			return ApiResponse.CreateError(RoleMessages.ROLE_FAILED_UPDATED + e.getMessage());
 		}
-
 	}
-	
-	
 }

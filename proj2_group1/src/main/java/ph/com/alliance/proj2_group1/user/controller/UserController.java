@@ -36,12 +36,12 @@ public class UserController {
 		return ApiResponse.CreateError(UserMessages.GENERIC_UNSUCCESSFUL_SAVE);
 	}
 
-	@PostMapping("/user/login")
+	@GetMapping("/user/login")
 	public ApiResponse login(
 			@RequestParam("email") final String email, 
 			@RequestParam("password") final String password)
 	{
-		User user = userService.login(email);
+		User user = userService.login(email, password);
 		
 		if(user == null) {
 			return ApiResponse.CreateError("User does not Exist");

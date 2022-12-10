@@ -43,8 +43,15 @@ public class UserService implements IUserService {
 	}
 	
 	//user login
-	public User login(String email) {
-		return userJpaRepository.findByEmail(email);
+	public User login(String email, String password) {
+		User reference = userJpaRepository.findByEmail(email);
+		
+		if (reference != null) {
+			if(reference.getPassword() == password) {
+				return reference;
+			}
+		}
+		return reference;
 	}
 	
 	public void deleteUser(Integer id) {

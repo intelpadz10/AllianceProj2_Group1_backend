@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import ph.com.alliance.proj2_group1.role.entity.Role;
 import ph.com.alliance.proj2_group1.role.repository.RoleRepository;
-import ph.com.alliance.proj2_group1.ticket.entity.Ticket;
 
 @Service
 public class RoleService implements IRoleService {
