@@ -1,6 +1,8 @@
+CREATE DATABASE  IF NOT EXISTS `alliancedb` /*!40100 DEFAULT CHARACTER SET utf8 */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `alliancedb`;
 -- MySQL dump 10.13  Distrib 8.0.31, for Win64 (x86_64)
 --
--- Host: localhost    Database: alliancedb
+-- Host: 127.0.0.1    Database: alliancedb
 -- ------------------------------------------------------
 -- Server version	8.0.24
 
@@ -23,11 +25,13 @@ DROP TABLE IF EXISTS `role`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `role` (
-  `role_id` int NOT NULL,
+  `role_id` int NOT NULL AUTO_INCREMENT,
   `role_description` varchar(255) NOT NULL,
   `role_initials` varchar(45) NOT NULL,
-  PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`role_id`),
+  UNIQUE KEY `role_description_UNIQUE` (`role_description`),
+  UNIQUE KEY `role_initials_UNIQUE` (`role_initials`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,11 +52,12 @@ DROP TABLE IF EXISTS `status`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `status` (
-  `status_id` int NOT NULL,
+  `status_id` int NOT NULL AUTO_INCREMENT,
   `status_name` varchar(45) NOT NULL,
   `description` varchar(255) DEFAULT '"no description"',
-  PRIMARY KEY (`status_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  PRIMARY KEY (`status_id`),
+  UNIQUE KEY `status_name_UNIQUE` (`status_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -85,15 +90,15 @@ CREATE TABLE `ticket` (
   `deadline_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `file_location` varchar(455) DEFAULT 'none',
   PRIMARY KEY (`ticket_id`),
-  KEY `ticket_class` (`ticket_category`),
   KEY `ticket_ibfk_1_idx` (`assignee_id`),
   KEY `ticket_ibfk_2_idx` (`sender_id`),
-  KEY `ticket_ibfk_5_idx` (`status_id`),
+  KEY `fk5_idx` (`status_id`),
+  KEY `fk4_idx` (`ticket_category`),
+  CONSTRAINT `fk4` FOREIGN KEY (`ticket_category`) REFERENCES `ticket_category` (`ticketcategory_id`) ON UPDATE CASCADE,
+  CONSTRAINT `fk5` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON UPDATE CASCADE,
   CONSTRAINT `ticket_ibfk_1` FOREIGN KEY (`assignee_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_4` FOREIGN KEY (`ticket_category`) REFERENCES `ticket_category` (`ticketcategory_id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `ticket_ibfk_5` FOREIGN KEY (`status_id`) REFERENCES `status` (`status_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8mb3;
+  CONSTRAINT `ticket_ibfk_2` FOREIGN KEY (`sender_id`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -102,7 +107,7 @@ CREATE TABLE `ticket` (
 
 LOCK TABLES `ticket` WRITE;
 /*!40000 ALTER TABLE `ticket` DISABLE KEYS */;
-INSERT INTO `ticket` VALUES (1,2,2,1,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(2,2,2,1,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content');
+INSERT INTO `ticket` VALUES (1,1,2,1,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(2,2,1,12,2,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(3,3,3,10,2,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(4,4,8,9,3,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(5,5,7,8,4,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(6,6,9,6,5,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(7,7,6,4,6,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(8,8,4,3,2,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(9,9,5,1,3,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(10,9,2,2,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(11,1,4,3,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(12,2,1,5,3,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(13,3,8,10,4,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(14,4,9,11,2,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(15,5,6,11,2,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(16,6,5,2,3,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(17,7,4,3,2,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(18,8,3,7,2,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(19,2,2,1,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(20,3,6,12,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(21,7,4,2,1,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(22,4,3,3,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(23,2,2,5,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(24,3,1,1,1,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path'),(25,5,2,6,1,'Deadline','Creation of Project','2022-11-23 00:05:18','2022-11-23 00:05:18','2022-11-29 08:51:25','content'),(26,9,7,9,1,'Deadline','Creation of Project','2022-11-23 00:24:44','2022-11-23 00:24:44','2022-11-29 08:51:25','content'),(27,1,6,11,1,'Deadline of Alliance Project','Deadiline of Project is set','2022-12-02 04:08:43','2022-12-02 04:08:43','2022-12-02 12:08:43','content-path');
 /*!40000 ALTER TABLE `ticket` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -114,14 +119,14 @@ DROP TABLE IF EXISTS `ticket_category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `ticket_category` (
-  `ticketcategory_id` int NOT NULL,
+  `ticketcategory_id` int NOT NULL AUTO_INCREMENT,
   `ticketcategory_name` varchar(45) NOT NULL,
   `description` varchar(255) NOT NULL,
   `default_assignee` int DEFAULT NULL,
   PRIMARY KEY (`ticketcategory_id`),
   KEY `category_tbfk1_idx` (`default_assignee`),
   CONSTRAINT `category_tbfk1` FOREIGN KEY (`default_assignee`) REFERENCES `user` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,8 +158,8 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `email_UNIQUE` (`email`),
   UNIQUE KEY `user_name_UNIQUE` (`user_name`),
-  KEY `role_id_idx` (`role_id`),
-  CONSTRAINT `role_id` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON UPDATE CASCADE
+  KEY `rolekeyforeign_idx` (`role_id`),
+  CONSTRAINT `rolekeyforeign` FOREIGN KEY (`role_id`) REFERENCES `role` (`role_id`) ON UPDATE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -185,4 +190,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-11-23 16:29:09
+-- Dump completed on 2023-01-09 10:46:02
